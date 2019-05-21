@@ -61,7 +61,7 @@ module.exports = function(config) {
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['PhantomJS'], // 无头(虚拟)浏览器 二进制程序 无界面 只支持es5代码 可以持续集成
-    browsers: ['Chrome'], // 有头的将来没法做持续集成
+    browsers: ['Chrome'], // 有头的将来没法做持续集成(集成到ci)
 
 
     // Continuous Integration mode
