@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+       function Yideng() {
+         getName = function () {
+           console.log(1)
+         }
+       }
+
+       Yideng.getName = function () {
+         console.log(2)
+       }
+
+       Yideng.prototype.getName = function () {
+         console.log(3)
+       }
+
+       var getName = function () {
+         console.log(4)
+       }
+
+       function getName() {
+         console.log(5)
+       }
+
+       Yideng.getName();
+       new Yideng.getName();
+    </script>
+</head>
+<body>
+  <h1>222</h1>
+</body>
+</html>

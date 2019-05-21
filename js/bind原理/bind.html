@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script src="bind.js" charset="utf-8"></script>
+<script type="text/javascript">
+  function test(data, data2, data3) {
+    console.log(this, data, data2, data3);
+  }
+
+  test.prototype.sayHello = function() {
+    console.log('来自原型链的hello');
+  }
+
+  this.obj = {a: 2}
+
+  // var targetFn = test._bind(this.obj, '参数1', '参数2');
+  var targetFn = test._bind(null);
+  //
+  targetFn('参数3'); // { a:2 }
+
+  var Test = new targetFn();
+  Test.sayHello();
+
+  // var fn = () => {
+  //   console.log(this);
+  // }
+  //
+  // console.log(typeof fn);
+  // new fn();
+</script>
+</html>
