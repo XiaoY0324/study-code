@@ -1,0 +1,17 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Person	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^  interface Person { \/\/ 接口中基本数据为static 参照下面执行run方法$/;"	interface	line:10
+run	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function run(); \/\/ 静态方法$/;"	function	line:12
+eat	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function eat($food); \/\/ 抽象方法有参数时 实现此方法也需要有参数 静态方法$/;"	function	line:13
+Study	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^  interface Study {$/;"	interface	line:16
+study	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function study();$/;"	function	line:17
+Student	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^  class Student implements Person, Study {$/;"	class	line:21
+run	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function run() {$/;"	function	line:24
+eat	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function eat($food) {$/;"	function	line:28
+study	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function study() {$/;"	function	line:32
+whatIam	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^    public function whatIam() {$/;"	function	line:36
+ys	/Users/ys/.bitnami/stackman/machines/xampp/volumes/root/htdocs/phptest/php面向对象/接口.php	/^  $ys = new Student();$/;"	variable	line:41
