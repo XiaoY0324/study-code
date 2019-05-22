@@ -6,11 +6,17 @@
   "scripts": {
     "unit": "karma start",
     "e2e:baidu": "node ./tests/e2e/baidu.spec.js",
-    "e2e:git": "node ./tests/e2e/git.spec.js"
+    "e2e:git": "node ./tests/e2e/git.spec.js",
+    "mocha": "node ./tests/service/mochaRunner.js",
+    "backstop": "backstop test"
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
+    "backstopjs": "^4.0.6",
     "karma": "^4.1.0",
+    "mocha": "^6.1.4",
+    "mochawesome": "^3.1.2",
     "puppeteer": "^1.16.0",
     "rize": "^0.8.0"
   },
