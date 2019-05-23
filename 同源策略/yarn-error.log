@@ -1,0 +1,36 @@
+Arguments: 
+  /Users/ys/.nvm/versions/node/v10.0.0/bin/node /Users/ys/.yarn/bin/yarn.js install koa --save
+
+PATH: 
+  /Users/ys/.yarn/bin:/Users/ys/.config/yarn/global/node_modules/.bin:/Users/ys/usr/local/Cellar/redis/4.0.2/bin:/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin:/Users/ys/workspace/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/ys/.yarn/bin:/Users/ys/.config/yarn/global/node_modules/.bin:/Users/ys/usr/local/Cellar/redis/4.0.2/bin:/Users/ys/.nvm/versions/node/v10.0.0/bin:/Users/ys/workspace/flutter/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  10.0.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "test",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add koa" instead.
+      at new MessageError (/Users/ys/.yarn/lib/cli.js:186:110)
+      at Object.<anonymous> (/Users/ys/.yarn/lib/cli.js:21987:13)
+      at Generator.next (<anonymous>)
+      at step (/Users/ys/.yarn/lib/cli.js:98:30)
+      at /Users/ys/.yarn/lib/cli.js:109:13

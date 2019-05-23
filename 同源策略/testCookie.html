@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>测试cookie</title>
+</head>
+<body>
+    <p>本页用来测试不同二级域名设置的共享cookie</p>
+</body>
+<script>
+    // 设置共享cookie(一级域名相同, 二级域名不同)
+    document.domain = 'shunshunliuxue.com';
+    document.cookie = 'name=共享cookie';
+    console.log(document.domain, document.cookie)
+</script>
+</html>
