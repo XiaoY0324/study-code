@@ -21,10 +21,9 @@
 > 1. http://local.shunshunliuxue.com:8080/index.html
 > 2. http://test.shunshunliuxue.com:8080/testCookie.html
 ```js
-    // 方法1 index.html设置document.domain
+    // 方法1 index.html设置domain
     // index.html
-    document.domain = 'shunshunliuxue.com';
-    document.cookie = '共享cookie';
+    document.cookie = 'name=共享cookie0220; domain=shunshunliuxue.com'; 
     // testCookie.html
     console.log(document.cookie);
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        class Functor {
+            constructor() {
+                this.left = 0;
+            }
+
+            map(f) {
+                Functor.of(f(this.left))
+            }
+        }
+
+        Functor.of = function () {
+            return new Functor();
+        }
+    </script>
+    <script src="./Either函子.js"></script>
+</head>
+<body>
+    
+</body>
+</html>
