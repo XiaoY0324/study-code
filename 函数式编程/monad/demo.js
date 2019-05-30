@@ -33,6 +33,7 @@ class IO extends Monad {
     static of (val) {
         return new IO(val);
     }
+    
     map(f) {
         return IO.of(compose(f, this.val))
     }
@@ -54,7 +55,7 @@ var print = function (x) {
 var tail = function (x) {
     console.log(x);
     return IO.of(function () {
-        return x+"【京程一灯】";
+        return x+"【第二步 tail】";
     });
 }
 
