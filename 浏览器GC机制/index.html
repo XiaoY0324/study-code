@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//    1.在js中定义的全局变量是不会被销毁的，因为我们随时都可能会用到这个变量，所以不能被销毁。
+// 　 2.但是在函数中定于的变量就不一定了，而且由于在函数的定义的变量的生命周期在执行完这个函数就销毁的原因自然就保存不了上一次的值。
+
+    // ---------------------------------- 栗子1(chrome查看GC回收, 并且触发回收) 🌰 -----------------------------
+    // function Student(name) {
+    //     this.name = name;
+    // }
+
+    // let student1 = new Student('杨帅');
+    // let student2 = new Student('老袁');
+
+    // 1. open in browser
+    // 2. 生成快照 Take heap snapshot(左上角实心小圆点)
+    // 3. 头顶搜索Student(头顶筛选框为class类名搜索, command + f 为变量搜索) 会出现两条记录 一个 name 为杨帅, 一个 name 为老袁。 其中Distance为GC的根距离
+    // student1 = null;
+    // 4. 重新生成快照 发现只剩下一个Student了, 但其实这种回收或者是setTimeout包裹的赋值null并不一定立马回收, 而是等待下一轮GC回收, 我们代码较少,所以看不出端倪, 怎么立马回收呢, node里的wakeMap可以立马执行。
+    // setTimeout(function () {
+    //     student2 = null;
+    // }, 5000);
+    // 5. 再重新生成快照 发现 student2还在 过去几秒后 重新生成 则被回收了
+
+    // ---------------------------------- 栗子2(闭包保持变量不被GC回收) 🌰 -----------------------------
+    // function Student(name) {
+    //     this.name = name;
+    // }
+
+    // let factory = function (name) {
+    //     let student = new Student(name);
+
+    //     return function () {
+    //         console.log(student);
+    //     }
+    // }
+
+    // let p1 = new factory('杨帅');
+
+    // p1();
+
+    // p1 = null; // 生成快照发现闭包内的变量 student 还在 说明闭包引用的变量不能被回收 but Distance根节点的距离为空, 因为没人使用它了。
+
+    // ---------------------------------- 栗子3(原理) 🌰 -----------------------------
+    // function test () {
+    //     var apple = '杨帅';
+        
+    //     return function () {
+    //         // eval('');
+    //         window.eval('')
+    //     }
+    // }
+
+    // test()();
+    // 生成快照 command + F 查找apple变量 连续寻找几次 发现了apple变量 我没引 为什么会在呢
+    // 在console控制台打印apple 或者在source里面 Watch apple变量时 发现执行完apple就没了, window上也没用, 那它跑哪儿了, 带着这些疑问往下看:
+    // ok 我们来探索下 把断点打在return function 这一行 我们先注释掉 eval('')
+    // 查看source -> Scope 区域的信息
+    // 点击断掉下一步 我们看到Scope 显示 Return value: ƒ ()... 找到里面的[[scopes]]
+    // 这个东西是啥呢 作用域链的原理就是[[scopes]] 作用域链就是指向[[scopes]] 此时里面只有1个 是指向Global的, 也就是window对象
+    // 我们知道window对象是没有apple变量的, 也就是返回的闭包函数作用域链也找不到apple, 说明apple被GC回收了
+    // ok, 我们放开eval('');
+    // 重复上面的操作, 我们发现window上面同样没有apple变量了, but! [[scopes]]里面多了一条
+    // Closure (test) {apple: "杨帅", arguments: Arguments(0)}
+    // 意思是原型链保留了一个闭包, 闭包里面存有apple的指向
+    // (感觉就是一个指针, 指针在window对象被干掉了, 闭包却保留了一个指针, 指向堆里面的值, 正是这样, 堆里面的值才没有被GC回收)
+
+    // ##### js中有几种情况会改变当前词法作用域
+
+    // > 1. eval 因为其不能分析包含的字符串中是否引用了当前作用域中的变量 (eval('var val = apple')), 
+        // 一旦解绑, 可能eval里面的代码直接down了，所以不解绑, 而是形成闭包保存变量的指针来避免GC回收。 但是有一个办法能解决掉这个问题
+        // 使用window.eval(''), 为什么呢, 它会认为你丫会想在 test 方法同级的地方执行。
+    // > 2. new Function 引号会把函数绑定到全局的词法作用域, 如下栗🌰
+        // var a = "jc";
+
+        // function init() {
+        //     var a = 'yd';
+        //     var test = new Function("console.log(a)"); // jc 把函数绑定到全局的词法作用域
+        //     // var test = new Function(console.log(a)); // yd
+
+        //     test();
+        // }
+
+        // init();
+    // 3.  with, 如果没有, 则把变量延伸到全局, 这样浏览器判断不出一个变量的声明是来自全局还是with表达式内部, 
+        // 所以不敢回收
+        // 一旦浏览器遇到了with, 它就放弃了with表达式里出现的所有变量的回收 莫名其妙的无法GC了, 比如下🌰 
+        // amazing和dage222都不会被回收 但是如果注释掉with里面的东西 则都会被回收
+        // function test () {
+        //     var dage222 = '杨帅';
+        //     var obj = {}
+
+        //     with (obj) {
+        //         amazing = '啊'; // amazing会被挂载到window上
+        //         console.log(dage222); // 杨帅
+        //     }
+            
+        //     return function () {
+        //         window.eval('')
+        //     }
+        // }
+
+        // test()();
+
+        // console.log(amazing); // 啊
+
+    // 4. try catch(e)  catch代码块执行期间中会保留变量的引用。
+        // 另外一个会改变作用域链的是try-catch语句中的catch语句。当try代码块中发生错误时，执行过程会跳转到catch语句，
+        // 然后把异常对象推入一个可变对象并置于作用域的头部。在catch代码块内部，函数的所有局部变量将会被放在第二个作用域链对象中。示例代码：
+        // try{
+        //     doSomething();
+        // }catch(ex){
+        //     alert(ex.message); //作用域链在此处改变
+        // }
+        //
+        // 请注意，一旦catch语句执行完毕，作用域链机会返回到之前的状态。try-catch语句在代码调试和异常处理中非常有用，
+        // 因此不建议完全避免。你可以通过优化代码来减少catch语句对性能的影响。一个很好的模式是将错误委托给一个函数处理，例如
+        // try{
+        //     doSomething();
+        // }catch(ex){
+        //     handleError(ex); //委托给处理器方法
+        // }
+
+        // 优化后的代码，handleError方法是catch子句中唯一执行的代码。该函数接收异常对象作为参数，
+        // 这样你可以更加灵活和统一的处理错误。由于只执行一条语句，且没有局部变量的访问，作用域链的临时改变就不会影响代码性能了。
+</script>
+</html>
