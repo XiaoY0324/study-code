@@ -5,6 +5,9 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "orm": "^5.0.4",
+    "swig": "^1.4.2"
   }
 }
