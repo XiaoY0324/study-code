@@ -1,0 +1,89 @@
+#!/usr/bin/env node
+const program = require('commander');
+// const lolcatjs = require('lolcatjs'); // 低版本 不变色
+const Printer = require('@darkobits/lolcatjs').default; // 自动变色
+const chalk = require('chalk'); // 改变打印文字的颜色 当然也可以用上面随机颜色来弄
+const inquirer = require('Inquirer'); // 跟用户交互
+const json2ts = require('json2ts'); // json 转 ts
+const shelljs = require('shelljs');
+const userhome = require('user-home');
+const ora = require('ora'); // loading
+
+var versionIcon = [
+    ' ',
+    '杨帅的脚手架',
+    ' ',
+    '__       ___ ',
+    '| | | | / __|',
+    '| |_| | \__ \\',
+    ' \__,  ||___/',
+    '  __/ |  ',
+    ' |___/ ',
+    ' ',
+    ' ',
+    ' '
+].join('\n');   
+                                
+program
+    .version(Printer.fromString(versionIcon), '-v,--version')
+
+// 命令行参数
+const bindHandler = {
+    init(param) {
+        console.log('用户准备初始化项目, 参数为' + param);
+        inquirer
+        .prompt([
+            {
+                type: 'text',
+                meaaage: '1️⃣ 请输入文件夹名称',
+                name: 'dirname'
+            }
+        ])
+        .then(answers => {
+            // 用户回答
+            console.log(answers.dirname);
+            shelljs.cd(`${userhome}/ys/构建工具/ys-cli/`);
+            const spinner = ora('👧 loading...');
+            spinner.start();
+
+            shelljs.mkdir(answers.dirname);
+
+            spinner.stop();
+        });
+    },
+    json2ts() {
+        const data = {
+            name: '杨帅',
+            data: {
+                age: 18
+            }
+        }
+
+        const jsonContent = JSON.stringify(data);
+        let result = json2ts.convert(jsonContent);
+
+        console.log(result);
+    }
+}
+
+// 定义方法 接受命令和一个参数 例如 ys init xxx (切记不匹配ys init --xx)
+program
+    .usage('<cmd> [options]')
+    .arguments("<cmd> [env]")
+    .action((cmd, otherParmas) => {
+        console.log(`参数1：${cmd}`, `参数2: ${otherParmas}`);
+        const handler = bindHandler[cmd];
+
+        if (typeof handler == 'undefined') {
+            console.error(chalk.yellow(`非常遗憾, 【${cmd}】暂未提供🤥`));
+            process.exit(1); // 错误退出
+        } else {
+            handler(otherParmas);
+        }
+    });
+
+program.option('-i,--init', '设置项目初始化🍎, 新建文件夹'); // 把 -init显示在 ys --help上
+program.option('-json2ts', 'revert json to ts'); 
+
+program.parse(process.argv);
+ 
