@@ -1,0 +1,127 @@
+{% extends '../layouts/layout.html' %}
+
+{% block title %}[[ title ]]{% endblock %}
+    
+{% block head %}
+    <link rel="stylesheet" href="/styles/books.css">
+    <script>
+        function renderCustomElm(Polymer) {
+            class XBooks extends Polymer.PolymerElement {
+                static get is() { return 'x-books'; }
+
+                static get template() { 
+                    return Polymer.html`
+                    <style>
+                        .books .item li {
+                            font-size: 13px;
+                            padding: 10px 15px;
+                            list-style: none;
+                            display: inline-block;
+                            /* border-right: 1px solid #3c3c3c; */
+                            margin-bottom: 15px;
+                        }
+
+                        .border {
+                            display: inline-block;
+                            width: 1px;
+                            height: 12px;
+                            background: #ccc;
+                            position: relative;
+                            top: 2px;
+                        }
+
+                        .books item {
+                            float: left;
+                        }
+                    </style>
+
+                    <!-- shadow DOM for your element -->
+                    <ul class="books">
+                        {% for list in bookLists %}
+                            <div class="item">
+                                <li>[[list.id]]</li>
+                                <span class="border"></span>
+                                <li>[[list.title]]</li>
+                                <span class="border"></span>
+                                <li>[[list.name]]</li>
+                                <span class="border"></span>
+                                <li>[[list.price]]</li>
+                                <span class="border"></span>
+                                <li>[[list.type]]</li>
+                                <span class="border"></span>
+                                <li>[[list.logoPath]]</li>
+                                <span class="border"></span>
+                                <li>
+                                    <button>查看</button>
+                                    <button>增加</button>
+                                    <a class="del-btn" href=[['/books/list/' + list.id]]>删除</a>
+                                </li>
+                            </div>
+                        {% endfor %}
+                    </ul>`;
+                }
+
+                // 为元素的公共 API 声明属物
+                static get properties() {
+                    return {
+                        bookLists: {
+                            type: Array
+                        }
+                    }
+                }
+                }
+
+            // Register the x-custom element with the browser
+            customElements.define('x-books', XBooks);
+        }
+    </script>
+    <!-- 如果浏览器支持es6+语法的执行环境 -->
+    <script type="module">
+        import('/@polymer/polymer/polymer-element.js').then(Polymer => {
+            console.log(Polymer); 
+            renderCustomElm(Polymer);
+        });
+    </script>
+    
+    <!--  如果浏览器不支持 -->
+    <!-- 
+        需要安装 @babel/core @babel/cli @babel/preset-env 包 
+        yarn add @babel/core  @babel/cli @babel/preset-env --save-dev
+        执行 npm run build
+        -->
+    <script type="nomodule" src="https://cdn.bootcss.com/systemjs/3.1.6/system.min.js"></script>
+    <script type="nomodule">
+        System.import('/@polymer/polymer/polymer-element.js').then(Polymer => {
+            renderCustomElm(Polymer);
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <x-books></x-books>
+    <!-- <ul class="books">
+        {% for list in bookLists %}
+            <div class="item">
+                <li>[[list.id]]</li>
+                <span class="border"></span>
+                <li>[[list.title]]</li>
+                <span class="border"></span>
+                <li>[[list.name]]</li>
+                <span class="border"></span>
+                <li>[[list.price]]</li>
+                <span class="border"></span>
+                <li>[[list.type]]</li>
+                <span class="border"></span>
+                <li>[[list.logoPath]]</li>
+                <span class="border"></span>
+                <li>
+                    <button>查看</button>
+                    <button>增加</button>
+                    <a class="del-btn" href=[['/books/list/' + list.id]]>删除</a>
+                </li>
+            </div>
+        {% endfor %}
+    </ul> -->
+{% endblock %}
+{% block script %}
+{% endblock %}
