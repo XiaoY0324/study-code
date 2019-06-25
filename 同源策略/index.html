@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试跨域</title>
+</head>
+<body>
+    <!-- 表单提交不存在跨域问题 img标签可以加载任何域的图片，script可以加载任何域的js。
+    再比如说你不能从前端js去调淘宝的接口获取ip对应的城市地址信息，，但是你可以手敲在浏览器地址栏，直接打开。
+    所谓的跨域问题只是浏览器强加给js的规则而已，世界本无跨域限制。是浏览器强制不允许js访问别的域，但是浏览器却没有限制它自己。-->
+    <form action="http://127.0.0.1:3000/post_form_api" method="POST">
+        <input type="text" placeholder="请输入名字" name="user_name">
+        <input type="submit" value="提交">
+    </form>
+
+    <img src="http://i1.whymtj.com/uploads/tu/201905/9999/9b26d77576.jpg"
+         style="margin-top: 30px;"   
+         alt="~">
+
+    <!-- <iframe src="https://baidu.com" width="600" height="500" frameborder="0"></iframe> -->
+</body>
+<!-- 这个就不会跨域 访问cdn.staticfile.org的域名 -->
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    console.log($);
+
+    console.log(document.cookie, document.domain);
+</script>
+</html>

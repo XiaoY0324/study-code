@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button is="button-hello">hello world</button>
+    <button-hello>自定义的web组件</button-hello>
+</body>
+<script>
+    class ButtonHelloElement extends HTMLButtonElement {
+        constructor() {
+            super();
+
+            this.addEventListener('click', () => {
+                alert('hello world!');
+            });
+        }
+    }
+
+    customElements.define('button-hello', ButtonHelloElement, { extends: 'button' });
+</script>
+</html>

@@ -1,0 +1,48 @@
+.book-manage h6 >a:last-child {
+    float: right;
+}
+
+.book-manage h6 {
+    padding: 0 15px;
+}
+
+/* 
+table th {
+    text-align: center;
+}
+
+table tr {
+    padding: 10px 0px;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+}*/
+
+table tr input {
+    height: 30px;
+    width: 80%;
+} 
+
+table td, table th {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.breadcrumb {
+    border: 1px solid #ccc;
+}
+
+/* 详情 */
+.view {
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.view h2 {
+    margin-top: 0px;
+}
+
+.view img {
+    width: 150px;
+    margin-bottom: 15px;
+}

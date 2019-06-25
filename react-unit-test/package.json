@@ -1,0 +1,15 @@
+{
+  "name": "react-unit-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "unit": "react-scripts test --env=jsdom"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "^3.0.1",
+    "react-testing-library": "^7.0.1"
+  }
+}

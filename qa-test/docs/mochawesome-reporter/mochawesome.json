@@ -1,0 +1,81 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2019-05-22T08:27:52.218Z",
+    "end": "2019-05-22T08:27:54.229Z",
+    "duration": 2011,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "danger",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "0cded04a-cf64-4bf8-ae3d-fdd83a0c8b66",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "5db3b189-82cc-4d94-9788-7fdfe7c7e626",
+        "title": "node接口",
+        "fullFile": "/Users/ys/ys/qa-test/tests/service/router.spec.js",
+        "file": "/tests/service/router.spec.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [
+          {
+            "title": "test接口测试",
+            "fullTitle": "node接口 test接口测试",
+            "timedOut": true,
+            "duration": 2003,
+            "state": "failed",
+            "pass": false,
+            "fail": true,
+            "pending": false,
+            "code": "axios.get('http://xcsss.com').then((result) => {\n    if (result === '期望值') {\n        done(); // 正常结束\n    } else {\n        done(new Error('数据不是期望值')); // 抛出错误结束\n    }\n}).catch((err) => {\n    done(err);\n});",
+            "err": {
+              "message": "Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves. (/Users/ys/ys/qa-test/tests/service/router.spec.js)",
+              "estack": "Error: Timeout of 2000ms exceeded. For async tests and hooks, ensure \"done()\" is called; if returning a Promise, ensure it resolves. (/Users/ys/ys/qa-test/tests/service/router.spec.js)"
+            },
+            "isRoot": false,
+            "uuid": "977b421b-ab6a-4641-9cc0-658293c85ac5",
+            "isHook": false,
+            "skipped": false
+          }
+        ],
+        "suites": [],
+        "passes": [],
+        "failures": [
+          "977b421b-ab6a-4641-9cc0-658293c85ac5"
+        ],
+        "pending": [],
+        "skipped": [],
+        "duration": 2003,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2019
+}

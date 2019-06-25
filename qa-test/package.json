@@ -1,0 +1,31 @@
+{
+  "name": "qa",
+  "version": "1.0.0",
+  "description": "test ",
+  "main": "index.js",
+  "scripts": {
+    "unit": "karma start",
+    "e2e:baidu": "node ./tests/e2e/baidu.spec.js",
+    "e2e:git": "node ./tests/e2e/git.spec.js",
+    "mocha": "node ./tests/service/mochaRunner.js",
+    "backstop": "backstop test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "backstopjs": "^4.0.6",
+    "karma": "^4.1.0",
+    "mocha": "^6.1.4",
+    "mochawesome": "^3.1.2",
+    "puppeteer": "^1.16.0",
+    "rize": "^0.8.0"
+  },
+  "devDependencies": {
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-jasmine": "^2.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "node-sass": "^4.12.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
