@@ -7,11 +7,11 @@ const co = require('co'); // 兼容koa-swig koa1 => koa2
 const log4js = require('log4js');
 const { join } = require('path');
 
-const config = require('./src/server/config');
-const errorHandle = require('./src/server/middlewares/errorHandle.js');
+const config = require('./config');
+const errorHandle = require('./middlewares/errorHandle.js');
 
 log4js.configure({
-  appenders: { cheese: { type: 'file', filename: './src/server/logs/yd.log' } },
+  appenders: { cheese: { type: 'file', filename: './logs/yd.log' } },
   categories: { default: { appenders: ['cheese'], level: 'error' } }
 });
 
@@ -32,9 +32,9 @@ errorHandle.error(app, logger);
 
 // 静态目录
 app.use(convert(serve(config.staticDir)));
-app.use(convert(serve(join(__dirname, 'node_modules'))));
+app.use(convert(serve('dist')));
 
-require('./src/server/controllers')(app); // 注册路由
+require('./controllers')(app); // 注册路由
 
 app.listen(config.port || '8081', () => {
     console.log('图书管理平台启动成功📚, localhost:' + config.port);

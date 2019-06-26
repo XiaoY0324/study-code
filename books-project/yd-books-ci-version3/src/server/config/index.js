@@ -2,7 +2,7 @@ const { extend } = require('lodash');
 const { join } = require('path');
 
 let config = {
-    'viewDir': join(__dirname, '..', '..', 'client/views'),
+    'viewDir': join(__dirname, '..'),
     'staticDir': join(__dirname, '..', '..', '..', 'assets')
 }
 

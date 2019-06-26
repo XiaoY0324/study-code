@@ -9,14 +9,18 @@ class BooksController {
     }
 
     async actionList(ctx, next) {
-        const result = await new Books().getData({
-            url: 'index?r=books'
-        });
-
-        ctx.body = await ctx.render('books/book_list.html', {
-            title: `📚图书列表`,
-            bookLists: result.data
-        });
+        try {
+            const result = await new Books().getData({
+                url: 'index?r=books'
+            });
+    
+            ctx.body = await ctx.render('index.html', {
+                title: `📚图书列表`,
+                bookLists: result.data
+            });
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     // async actionDelete(ctx, next) {
