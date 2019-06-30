@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _config = require("../config");
+var _config = _interopRequireDefault(require("../config"));
 
 var _nodeFetch = _interopRequireDefault(require("node-fetch"));
 
@@ -18,7 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class SafeRequest {
   constructor(options) {
     this.options = options;
-    this.baseUrl = _config.baseUrl;
+    this.baseUrl = _config.default.baseUrl;
   }
 
   fetch() {

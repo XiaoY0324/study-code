@@ -29,6 +29,7 @@
     "@babel/preset-env": "^7.4.5",
     "babel-loader": "^8.0.6",
     "co": "^4.6.0",
+    "copy-webpack-plugin": "^5.0.3",
     "cross-env": "^5.2.0",
     "ejs-compiled-loader": "^1.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",

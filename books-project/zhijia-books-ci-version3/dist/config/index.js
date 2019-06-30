@@ -10,7 +10,7 @@ var _lodash = require("lodash");
 var _path = require("path");
 
 let config = {
-  'viewDir': (0, _path.join)(__dirname, '..'),
+  'viewDir': (0, _path.join)(__dirname, '..', '..', 'dist/views'),
   'staticDir': (0, _path.join)(__dirname, '..', '..', '..', 'assets')
 };
 

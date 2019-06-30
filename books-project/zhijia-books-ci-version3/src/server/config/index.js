@@ -2,7 +2,7 @@ import { extend } from 'lodash';
 import { join } from 'path';
 
 let config = {
-    'viewDir': join(__dirname, '..'),
+    'viewDir': join(__dirname, '..', '..', 'dist/views'),
     'staticDir': join(__dirname, '..', '..', '..', 'assets')
 }
 

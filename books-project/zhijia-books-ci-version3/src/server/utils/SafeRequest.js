@@ -2,13 +2,13 @@
  * 安全请求方法 
  * 每次node 请求 必须经过这一层
  */
-import { baseUrl } from '../config';
+import config from '../config';
 import fetch from 'node-fetch';
 
 class SafeRequest {
     constructor(options) {
         this.options = options;
-        this.baseUrl = baseUrl;
+        this.baseUrl = config.baseUrl;
     }
 
     fetch() {

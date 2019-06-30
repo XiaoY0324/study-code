@@ -1,9 +1,9 @@
-[2019-06-30T22:37:28.883] [ERROR] cheese - { Error: ENOENT: no such file or directory, open '/Users/ys/ys/books-project/zhijia-books-ci-version3/dist/books/index.html'
+[2019-07-01T00:31:08.100] [ERROR] cheese - { Error: ENOENT: no such file or directory, open '/Users/ys/ys/books-project/zhijia-books-ci-version3/dist/books/index.html'
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',
   path: '/Users/ys/ys/books-project/zhijia-books-ci-version3/dist/books/index.html' }
-[2019-06-30T22:40:53.857] [ERROR] cheese - { Error: ENOENT: no such file or directory, open '/Users/ys/ys/books-project/zhijia-books-ci-version3/dist/books/index.html'
+[2019-07-01T00:31:25.489] [ERROR] cheese - { Error: ENOENT: no such file or directory, open '/Users/ys/ys/books-project/zhijia-books-ci-version3/dist/books/index.html'
   errno: -2,
   code: 'ENOENT',
   syscall: 'open',

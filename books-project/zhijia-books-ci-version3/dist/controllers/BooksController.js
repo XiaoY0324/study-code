@@ -20,7 +20,7 @@ class BooksController {
       const result = await new _Books.default().getData({
         url: 'index?r=books'
       });
-      ctx.body = await ctx.render('index.html', {
+      ctx.body = await ctx.render('books/pages/list', {
         title: `📚图书列表`,
         bookLists: result.data
       });
