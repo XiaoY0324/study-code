@@ -1,0 +1,17 @@
+
+<div class="books" id="js-hooks-data">
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th class="text-center">编号</th>
+            <th class="text-center">书名</th>
+            <th class="text-center">类型</th>
+        </tr>
+        {% for list in bookLists %}
+            <tr>
+                <td>[[list.id]]</td>
+                <td>[[list.name]]</td>
+                <td>[[list.type]]</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
