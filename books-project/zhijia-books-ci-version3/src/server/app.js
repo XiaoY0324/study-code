@@ -10,9 +10,9 @@ import registerCtrl from './controllers';
 
 import config from './config'; 
 import errorHandle from './middlewares/errorHandle.js';
-// { viewDir, staticDir, port }
+
 configure({
-  appenders: { cheese: { type: 'file', filename: __dirname + '/logs/yd.log' } },
+  appenders: { cheese: { type: 'file', filename: join(__dirname, '..' ,'/logs/err.log') } },
   categories: { default: { appenders: ['cheese'], level: 'error' } }
 });
 
@@ -33,6 +33,7 @@ errorHandle.error(app, logger);
 
 // 静态目录
 app.use(convert(serve(config.staticDir)));
+app.use(convert(serve(join(__dirname, '..', 'assets'))));
 app.use(convert(serve('dist')));
 
 registerCtrl(app); // 注册路由

@@ -8,3 +8,9 @@ npm run server:dev
 npm run server:start
 
 http://localhost:8082/books/list
+
+第三版图书管理 
+给项目增加webpack 支持es6
+给node端增加gulp 支持es6
+ci集成(Jenkins or travis)
+cli脚手架帮助构建

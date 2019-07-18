@@ -23,12 +23,11 @@ var _errorHandle = _interopRequireDefault(require("./middlewares/errorHandle.js"
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = new _koa.default();
-// { viewDir, staticDir, port }
 (0, _log4js.configure)({
   appenders: {
     cheese: {
       type: 'file',
-      filename: __dirname + '/logs/yd.log'
+      filename: (0, _path.join)(__dirname, '..', '/logs/err.log')
     }
   },
   categories: {
@@ -55,6 +54,7 @@ _errorHandle.default.error(app, logger); // 静态目录
 
 
 app.use((0, _koaConvert.default)((0, _koaStatic.default)(_config.default.staticDir)));
+app.use((0, _koaConvert.default)((0, _koaStatic.default)((0, _path.join)(__dirname, '..', 'assets'))));
 app.use((0, _koaConvert.default)((0, _koaStatic.default)('dist')));
 (0, _controllers.default)(app); // 注册路由
 
