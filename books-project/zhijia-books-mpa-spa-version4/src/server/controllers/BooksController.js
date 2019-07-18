@@ -22,8 +22,18 @@ class BooksController {
             console.log('站内跳');
             // 站内跳刷新一丢丢 你怎么知道刷新哪一丢丢呢 cheerio 来做
             const $ = cheerio.load(html); // 变成jq dom 对象
+            let _result = '';
 
-            ctx.body = $('#js-hooks-data').html(); // 刷新局部
+            $('.pjaxcontext').each(function() {
+                console.log($(this));
+                _result += $(this).html();
+            });
+
+            $('.lazyload-js').each(function() {
+                _result += `<script src="${ $(this).attr('src') }"></script>`;
+            });
+
+            ctx.body = _result;
         } else {
             console.log('直接刷');
             ctx.body = html;
