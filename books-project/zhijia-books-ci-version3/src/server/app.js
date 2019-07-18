@@ -33,7 +33,7 @@ errorHandle.error(app, logger);
 
 // 静态目录
 app.use(convert(serve(config.staticDir)));
-app.use(convert(serve(join(__dirname, '..', 'assets'))));
+app.use(convert(serve(join(__dirname, '..', 'dist', 'assets'))));
 app.use(convert(serve('dist')));
 
 registerCtrl(app); // 注册路由
