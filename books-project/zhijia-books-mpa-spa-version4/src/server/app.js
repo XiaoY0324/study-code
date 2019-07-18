@@ -6,15 +6,29 @@ import render from 'koa-swig';
 import { wrap } from 'co'; // 兼容koa-swig koa1 => koa2
 import { configure, getLogger } from 'log4js';
 import { join } from 'path';
-import registerCtrl from './controllers';
+import { createContainer, Lifetime } from 'awilix'; // 把容器、 生命周期引进来  ------------- ioc 步骤一
+import { loadControllers, scopePerRequest } from 'awilix-koa'; //  -------------- ioc步骤二
 
 import config from './config'; 
 import errorHandle from './middlewares/errorHandle.js';
+// import camelCase = require('camel-case');
 
 configure({
   appenders: { cheese: { type: 'file', filename: join(__dirname, '..' ,'/logs/err.log') } },
   categories: { default: { appenders: ['cheese'], level: 'error' } }
 });
+
+// 必须把 Service 融入到容器里
+const container = createContainer();               // ------------------------- ioc 步骤三
+container.loadModules([__dirname + '/services/*.js'], {
+  formatName: 'camelCase', // 驼峰
+  resolverOptions: {
+    lifetime: Lifetime.SCOPED // 每次执行完销毁
+  }
+});
+
+// 终极注入
+app.use(scopePerRequest(container));
 
 // 配置koa-swig
 app.context.render = wrap(render({
@@ -36,7 +50,7 @@ app.use(convert(serve(config.staticDir)));
 app.use(convert(serve(join(__dirname, '..', 'dist', 'assets'))));
 app.use(convert(serve('dist')));
 
-registerCtrl(app); // 注册路由
+app.use(loadControllers(__dirname + '/controllers/*.js')); // ------------------------- ioc 步骤四
 
 app.listen(config.port || '8081', () => {
     console.log('图书管理平台启动成功📚, localhost:' + config.port);

@@ -1,18 +1,21 @@
-import Books from '../models/Books';
 import cheerio from 'cheerio';
+import { route, GET } from 'awilix-koa'; 
 
 /**
  * 路由具体实现
  */
+// 父controller
+@route('/books')
 class BooksController {
-    constructor() {
-        
+    constructor({ booksService }) {
+        this.booksService = booksService;
     }
 
+    @route('/list')
+    @GET()
     async actionList(ctx, next) {
-        const result = await new Books().getData({
-            url: 'index?r=books'
-        });
+        const result = await this.booksService.getData();
+        console.log(result, 'ssssssssss');
         const html = await ctx.render('books/pages/list', {
             title: `📚图书列表`,
             bookLists: result.data
@@ -40,6 +43,8 @@ class BooksController {
         }
     }
 
+    @route('/add')
+    @GET()
     async actionAdd(ctx, next) {
         ctx.body = await ctx.render('books/pages/add');
     }

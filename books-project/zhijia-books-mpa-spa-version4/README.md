@@ -14,3 +14,6 @@ http://localhost:8082/books/list
 给node端增加gulp 支持es6
 ci集成(Jenkins or travis)
 cli脚手架帮助构建
+
+##### 新增
+service: 增加服务 采用依赖注入方式管理node代码 

@@ -17,3 +17,29 @@
   code: 'ENOENT',
   syscall: 'open',
   path: '/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/dist/views/books/pages/add.html' }
+[2019-07-18T18:21:53.066] [ERROR] cheese - AwilixResolutionError: Could not resolve 'booksService'.
+
+Resolution path: booksService
+    at resolve (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/container.js:234:23)
+    at Object.get (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/container.js:65:32)
+    at new BooksController (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/dist/controllers/BooksController.js:24:5)
+    at newClass (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/resolvers.js:85:24)
+    at Object.resolve (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/resolvers.js:294:20)
+    at Object.build (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/container.js:307:37)
+    at memberInvoker (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix-koa@4.0.0@awilix-koa/lib/invokers.js:83:38)
+    at dispatch (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_koa-compose@3.2.1@koa-compose/index.js:44:32)
+    at next (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_koa-compose@3.2.1@koa-compose/index.js:45:18)
+    at /Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_@koa_router@8.0.0@@koa/router/lib/router.js:346:16
+[2019-07-18T18:23:59.955] [ERROR] cheese - AwilixResolutionError: Could not resolve 'booksService'.
+
+Resolution path: booksService
+    at resolve (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/container.js:234:23)
+    at Object.get (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/container.js:65:32)
+    at new BooksController (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/dist/controllers/BooksController.js:24:5)
+    at newClass (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/resolvers.js:85:24)
+    at Object.resolve (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/resolvers.js:294:20)
+    at Object.build (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix@4.2.2@awilix/lib/container.js:307:37)
+    at memberInvoker (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_awilix-koa@4.0.0@awilix-koa/lib/invokers.js:83:38)
+    at dispatch (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_koa-compose@3.2.1@koa-compose/index.js:44:32)
+    at next (/Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_koa-compose@3.2.1@koa-compose/index.js:45:18)
+    at /Users/ys/ys/books-project/zhijia-books-mpa-spa-version4/node_modules/_@koa_router@8.0.0@@koa/router/lib/router.js:346:16

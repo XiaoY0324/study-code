@@ -11,7 +11,10 @@ function builddev() {
         gulp.src(entry)
         .pipe(babel({
             babelrc: false, // 需要自己独立的编译 很重要 忽略外面的.babelrc文件
-            "plugins": ["@babel/plugin-transform-modules-commonjs"] // 需要安装@babel/plugin-transform-modules-commonjs
+            "plugins": [
+                ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                "@babel/plugin-transform-modules-commonjs"
+            ] // 需要安装@babel/plugin-transform-modules-commonjs
         })).pipe(gulp.dest('dist'));
     })
 }
@@ -22,7 +25,10 @@ function buildprod() {
     .pipe(babel({
         babelrc: false, 
         ignore: cleanEntry, // 忽略掉此文件
-        "plugins": ["@babel/plugin-transform-modules-commonjs"] 
+        "plugins": [
+            ["@babel/plugin-proposal-decorators", { "legacy": true }],
+            "@babel/plugin-transform-modules-commonjs"
+        ] 
     })).pipe(gulp.dest('dist'));
 }
 

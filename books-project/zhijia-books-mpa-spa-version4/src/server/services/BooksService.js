@@ -5,7 +5,7 @@
  */
 import SafeRequest from '../utils/SafeRequest';
 
-class Books {
+class BooksService {
     /**
      * Books类 获取后台图书信息的数据类
      * @class
@@ -25,7 +25,10 @@ class Books {
       * return new Promise
       * getData(options)
       */
-     getData(options) {
+     getData() {
+        const options ={
+            url: 'index?r=books'
+        };
         const safeRequest = new SafeRequest(options);
 
         return safeRequest.fetch();
@@ -45,4 +48,4 @@ class Books {
      }
 }
 
-export default Books;
+export default BooksService;

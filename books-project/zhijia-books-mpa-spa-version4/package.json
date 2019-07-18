@@ -55,6 +55,9 @@
     "webpack-merge": "^4.2.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "awilix": "^4.2.2",
+    "awilix-koa": "^4.0.0",
     "css-loader": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jsdoc": "^3.6.2",
