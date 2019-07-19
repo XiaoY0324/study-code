@@ -11,7 +11,6 @@ import { loadControllers, scopePerRequest } from 'awilix-koa'; //  -------------
 
 import config from './config'; 
 import errorHandle from './middlewares/errorHandle.js';
-// import camelCase = require('camel-case');
 
 configure({
   appenders: { cheese: { type: 'file', filename: join(__dirname, '..' ,'/logs/err.log') } },

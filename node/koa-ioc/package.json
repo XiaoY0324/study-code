@@ -1,0 +1,21 @@
+{
+  "name": "koa-ioc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "gulp & nodemon dist/app.js "
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.5.0",
+    "awilix": "^4.2.2",
+    "awilix-koa": "^4.0.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-watch": "^5.0.1",
+    "koa": "^2.7.0",
+    "log4js": "^4.5.1"
+  }
+}
