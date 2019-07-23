@@ -1,5 +1,7 @@
 import cheerio from 'cheerio';
 import { route, GET } from 'awilix-koa'; 
+import { Readable } from 'stream';
+import { resolve } from 'any-promise';
 
 /**
  * 路由具体实现
@@ -15,7 +17,6 @@ class BooksController {
     @GET()
     async actionList(ctx, next) {
         const result = await this.booksService.getData();
-        console.log(result, 'ssssssssss');
         const html = await ctx.render('books/pages/list', {
             title: `📚图书列表`,
             bookLists: result.data
@@ -39,7 +40,21 @@ class BooksController {
             ctx.body = _result;
         } else {
             console.log('直接刷');
-            ctx.body = html;
+            /**
+             * bigpipe 方式处理页面数据
+             */
+            function createSSRStreamPromise() {
+                return new Promise((reject, resolve) => {
+                    const htmlStream = new Readable();
+                    
+                    htmlStream.push(html);
+                    htmlStream.push(null);
+                    htmlStream.on('error', err => reject(err)).pipe(ctx.res); // 这一句是关键
+                });
+            }
+
+            await createSSRStreamPromise();
+            // ctx.body = html;
         }
     }
 
