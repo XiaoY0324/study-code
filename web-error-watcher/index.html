@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 语法错误 异步错误 try..catch.. 捕获不到 -->
+    <!-- <script src="./try&catch_step1.js"></script>  -->
+    
+    <img src="/xxx.png">
+
+    <!-- 能捕获语法 异步错误 但是网络静态资源请求错误捕获不到 -->
+    <!-- <script src="./win_onerror_step2.js"></script> -->
+    
+    <!-- 事件捕获阶段去拦截资源请求的错误 但是捕获不到 promise 错误 -->
+    <!-- <script src="./win_error_link_step3.js"></script> -->
+
+    <!-- 捕获到promise错误 -->
+    <script src="./win_unhandledrejection_step4.js"></script>
+
+</body>
+</html>

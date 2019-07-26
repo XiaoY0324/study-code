@@ -54,3 +54,16 @@ app.use(loadControllers(__dirname + '/controllers/*.js')); // ------------------
 app.listen(config.port || '8081', () => {
     console.log('图书管理平台启动成功📚, localhost:' + config.port);
 });
+
+// 仿fundebug 做node 错误处理 
+process.on("uncaughtException", function(error) { // 全局挂了
+  logger.error(error);
+});
+
+process.on("unhandledRejection", function(error) { // promise挂了
+  logger.error(error.reason);
+});
+
+app.on('error', function(error) {
+  logger.error(error);
+});

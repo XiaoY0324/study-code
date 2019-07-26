@@ -28,21 +28,26 @@ class BooksController {
             const $ = cheerio.load(html); // 变成jq dom 对象
             let _result = '';
 
+            ctx.status = 200;
             $('.pjaxcontext').each(function() {
                 console.log($(this));
-                _result += $(this).html();
+                // _result += $(this).html();
+                ctx.res.write($(this).html());
             });
 
             $('.lazyload-js').each(function() {
-                _result += `<script src="${ $(this).attr('src') }"></script>`;
+                // _result += `<script src="${ $(this).attr('src') }"></script>`;
+                ctx.res.write(`<script src="${ $(this).attr('src') }"></script>`);
             });
 
-            ctx.body = _result;
+            // ctx.body = _result;
+            ctx.res.end();
         } else {
             console.log('直接刷');
             /**
              * bigpipe 方式处理页面数据
              */
+            ctx.status = 200;
             function createSSRStreamPromise() {
                 return new Promise((reject, resolve) => {
                     const htmlStream = new Readable();
@@ -55,6 +60,7 @@ class BooksController {
 
             await createSSRStreamPromise();
             // ctx.body = html;
+            ctx.res.end();
         }
     }
 

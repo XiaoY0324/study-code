@@ -21,9 +21,15 @@
     <!-- pjax 帮我们切换路由 多页项目做单页切换用的 -->
     <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+    <script src="https://unpkg.com/quicklink@1.0.0/dist/quicklink.umd.js"></script>
     <script>
+        // 网站性能提升之王~~ 以下两个
+
         // pjax 功能 把下一页的url 通过ajax 的方式发出去 改掉url 相当于劫持了a标签的跳转 同时换掉url
-        $(document).pjax('a', '#app'); // 代理a标签 输出到#app
+        $(document).pjax('a', '#app'); // 代理a标签 输出到#app 实现mpa中的spa切换
+
+        // quicklink 资源预加载
+        quicklink();
     </script>
     {% block script %} {% endblock %}
 </html>
