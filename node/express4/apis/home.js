@@ -2,6 +2,11 @@ var express = require('express');
 var router = new express.Router();
 var app = express();
 
+router.get('/ss', function(req, res) {
+    const isScript = req.originalUrl.includes('alert');
+   console.log(isScript);
+});
+
 router.post('/recieve', function(req, res) {
     console.log(req.body);
     req.models.user_info.create([{ userName: req.body.userName }], function(err, items) {

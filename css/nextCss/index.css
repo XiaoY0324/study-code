@@ -1,0 +1,12 @@
+:root {
+    --mainColor: #12345678; 
+    /* js in css  */
+    --background-canvas: (ctx) => {
+        console.log(123);
+    }
+}
+
+body {
+    /* 也可以写局部变量 在这里声明mainColor */
+    background: var(--mainColor);
+}
