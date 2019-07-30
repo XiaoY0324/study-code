@@ -1,12 +1,15 @@
 :root {
     --mainColor: #12345678; 
+    --booksUnit: 42px;
     /* js in css  */
     --background-canvas: (ctx) => {
         console.log(123);
     }
 }
 
-body {
+ul {
+    list-style: none;
+    height: var(--booksUnit);
     /* 也可以写局部变量 在这里声明mainColor */
     background: var(--mainColor);
 }
