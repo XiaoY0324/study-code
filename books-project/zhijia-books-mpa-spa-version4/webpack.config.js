@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const htmlAfterPlugin = require('./config/htmlAfterPlugin');
-const { join } = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 提取css
+const path = require('path');
 const merge = require('webpack-merge');
 const argv = require('yargs-parser')(process.argv.slice(2)); // 取命令行参数
 const _mode = argv.mode || 'development';   // 区分开发环境和上线环境的配置
@@ -42,7 +43,7 @@ console.log(_entry, 'entry');
 const webpackConfig = {
     entry: _entry,
     output: {
-        path: join(__dirname, './dist/assets'),
+        path: path.join(__dirname, './dist/assets'),
         publicPath: '/',
         filename: "scripts/[name].bundle.js"
     },
@@ -61,7 +62,22 @@ const webpackConfig = {
           {
             test: /\.css$/,
             use: [
-              'style-loader',
+              { loader: MiniCssExtractPlugin.loader },
+              // 'style-loader',
+
+              // 给class 名加hash 防止冲突 适合单页 多页不适合。。 至于为啥 我也不清楚。。
+              // { 
+              //   loader: 'css-loader',
+              //   options: {
+              //     modules: {
+              //       mode: 'local',
+              //       localIdentName: '[local]--[hash:base64:5]',
+              //       context: path.resolve(__dirname, 'src'),
+              //       hashPrefix: 'my-custom-hash',
+              //     }
+              //   }
+              // },
+
               { loader: 'css-loader', options: { importLoaders: 1 } },
               'postcss-loader'
             ]
@@ -74,6 +90,10 @@ const webpackConfig = {
         //     filename: `index.html`
         // }),
         ..._plugins,
+        new MiniCssExtractPlugin({
+          filename: 'styles/[name].css',
+          chunkFilename: 'styles/[id].css'
+        }),
         new htmlAfterPlugin
     ],
     watch: __modeFlag

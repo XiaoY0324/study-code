@@ -32,6 +32,7 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 node_modules
+yarn-error.log
 src/server/logs/*
 docs
 dist

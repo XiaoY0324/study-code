@@ -21,6 +21,7 @@ class BooksController {
             title: `📚图书列表`,
             bookLists: result.data
         });
+        console.log(html);
 
         if (ctx.request.header['x-pjax']) {
             console.log('站内跳');
@@ -29,8 +30,15 @@ class BooksController {
             let _result = '';
 
             ctx.status = 200;
+            
+            // 尝试未果的css 站内跳重新加载
+            // $('.lazyload-css').each(function() {
+            //     $('head').append(`<link rel="stylesheet" type="text/css" href="${ $(this).attr('href') }"/>`);
+            //     console.log('append...', $('head'));
+            // });
+
             $('.pjaxcontext').each(function() {
-                console.log($(this));
+                // console.log($(this));
                 // _result += $(this).html();
                 ctx.res.write($(this).html());
             });
