@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js in css</title>
+    <style>
+        .el {
+            --elUnit: 500px;
+            --arcColor: #8266ff;
+            height: var(--elUnit);
+            width: var(--elUnit);
+
+            /* 要传入arc.js中的函数变量名  切记每一段写完加分号~~ */
+            --background-canvas: (ctx, geom) => {
+                ctx.strokeStyle = `var(--arcColor)`; 
+                ctx.lineWidth=4;
+                ctx.beginPath();
+                ctx.arc(200, 200, 50, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.closePath();
+            }; 
+            background: paint(background-canvas);
+        }
+    </style>
+</head>
+<body>
+    <div class="el"></div>
+    <script>
+        // 没有注册 background-canvas 的代码 hodini 是不会生效的哦
+        // 赋予一些hodini 的能力
+        CSS.paintWorklet.addModule('./arc.js');
+    </script>
+</body>
+</html>

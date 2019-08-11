@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js in css</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            background: #000;
+        }
+
+        /* 模拟一个body 重绘重排跟 body 无关 节约性能 */
+        body:before {
+            /* 密度 */
+            --sky-density: 0.8; 
+            --star-opacity: 1;
+            /* 随机数 */
+            --star-seed: 1;
+            content: '';
+            /* absolute 独立一层 使整个body的重绘 */
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-image: paint(ys-sky);
+        }
+
+        body:before {
+            animation: shine 2s linear alternate infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                opacity: 1;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            40% {
+                opacity: 0.6;
+            }
+
+            60% {
+                opacity: 0.4;
+            }
+
+            80% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="el"></div>
+    <script>
+        if (!CSS || !CSS.paintWorklet) {
+            console.log('暂不支持CSS houdini');
+        } else {
+            CSS.paintWorklet.addModule('./sky.js');
+        }
+    </script>
+</body>
+</html>
