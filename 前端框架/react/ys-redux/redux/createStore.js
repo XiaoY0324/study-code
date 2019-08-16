@@ -18,6 +18,13 @@ export default function createStore(reducer, initState, rewriteCreateStoreFunc) 
 
     function subscribe(listener) {
         listeners.push(listener); // 维护监听者列表
+
+        // 取消订阅 怎么取消 ？？？
+        return function unsubscribe() {
+            const index = listeners.indexOf(listener);
+
+            listeners.splice(index, 1);
+        }
     };
 
     // 接受外部 action 行为 对 state 进行更新
