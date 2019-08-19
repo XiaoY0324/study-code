@@ -9,23 +9,11 @@ const AsyncComponent = lazy(() => import('@components/AsyncComponent')); // 异�
 const BasicRoute = () => (
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
-      {/* <div className="App">
-        <ul className="nav green">
-          <li>
-            <Link to="/home">home 组件</Link>
-          </li>
-          <li>
-            <Link to="/login">login 组件</Link>
-          </li>
-        </ul>
-      </div> */}
-      {/* 
-        Switch && exact
-      */}
+      {/* Switch 和 exact 需配套使用 */}
       <Switch>
-          <Route exact path="/" component={ Login } />
-          <Route exact path="/home" component={ Home } />
-          {/* <Route exact path="/login" component={ Login } /> */}
+        <Route exact path="/" component={Login} />
+        <Route exact path="/home" component={Home} />
+        {/* <Route exact path="/login" component={ Login } /> */}
       </Switch>
     </Suspense>
   </Router>

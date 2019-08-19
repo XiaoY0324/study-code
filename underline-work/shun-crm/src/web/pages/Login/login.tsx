@@ -11,7 +11,19 @@ const checkLogin = () => {
 		else return;
 }
 
-const submitLogin = (firstDom, SecondDom) => {
+interface valueObj {
+	value: string | void
+}
+
+type stateObj = {
+	state:  valueObj
+}
+
+type refObj = { 
+	current: stateObj
+}
+
+const submitLogin = (firstDom: refObj, SecondDom: refObj) => {
 	if (!firstDom.current.state.value || !SecondDom.current.state.value) {
 		return message.error('Please check if all the options are filled out!');
 	}
