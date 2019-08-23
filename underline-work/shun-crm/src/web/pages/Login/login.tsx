@@ -1,58 +1,63 @@
 import * as React from "react";
-import { createRef } from 'react';
+import { createRef, RefObject } from 'react';
+import { observable } from 'mobx'
+import { Observer, useObserver, observer } from 'mobx-react-lite'
+
+import LoginForm from './LoginForm';
 import './login.css';
 import { Input, Button, Icon, message } from 'antd';
+import { Redirect } from "react-router-dom";
 
-// 判断是否登陆过
-const checkLogin = () => {
-	let curUser = sessionStorage.getItem('curUser') ? JSON.parse(sessionStorage.getItem('curUser')) : undefined;
+const loginState = observable({
+	token: "",
+	loading: false,
+	username: "",
+	password: ""
+});
 
-	if (curUser) window.location.href = '/home';
-		else return;
-}
+const loginHandler = () => {
+	if (!loginState.username || !loginState.password) {
 
-interface valueObj {
-	value: string | void
-}
-
-type stateObj = {
-	state:  valueObj
-}
-
-type refObj = { 
-	current: stateObj
-}
-
-const submitLogin = (firstDom: refObj, SecondDom: refObj) => {
-	if (!firstDom.current.state.value || !SecondDom.current.state.value) {
-		return message.error('Please check if all the options are filled out!');
+		return message.warning('请填写完整表单项');
 	}
 
-	let curUser = {
-		name: firstDom.current.state.value,
-		password: SecondDom.current.state.value
-	};
+	loginState.loading = true;
+	const { username, password } = loginState;
 
-	sessionStorage.setItem("curUser", JSON.stringify(curUser));
-	window.location.href = '/home';
+	setTimeout(() => {
+		loginState.loading = false;
+		localStorage.setItem('curUser', JSON.stringify({ username, password }));
+		window.location.href = '/home';
+	}, 1000);
+};
+
+// props传递 只能从父层修改属性 
+const changeInput = (key: string, domRef: RefObject<Input>): void => {
+	setTimeout(() => {
+		if (key == 'username' && domRef.current.state.value) loginState['username'] = domRef.current.state.value;
+		else if (key == 'password' && domRef.current.state.value) loginState['password'] = domRef.current.state.value;
+
+
+		console.log('用户名', loginState.username);
+		console.log('密码', loginState.password);
+	});
 }
 
-const LoginComponent = () => {
-		checkLogin();
-		const firstInput = createRef();
-		const SecondInput = createRef();
+const LoginComponent = observer(() => {
+	console.log(localStorage.getItem('curUser'), !localStorage.getItem('curUser'), !!localStorage.getItem('curUser'));
+	const showLogin = !!localStorage.getItem('curUser');
 
-    return <>
-            <div className="ligin-container">
-							<div className="login-box">
-								<form>
-									<Input ref={ firstInput } prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username"/>
-									<Input ref={ SecondInput } prefix={<Icon type="password" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Password"/>
-									<Button onClick={ submitLogin.bind(this, firstInput, SecondInput) }>login!</Button>	
-								</form>		
-							</div>
-						</div>
-           </>
-}
+	return <>
+		{
+			showLogin
+				? <Redirect to="/home" />
+				: <div className="ligin-container">
+					<div className="login-box">
+						<LoginForm  {...loginState} loginHandle={loginHandler} changeInput={changeInput} />
+					</div>
+				</div>
+		}
+	</>
+})
 
 export default LoginComponent;
