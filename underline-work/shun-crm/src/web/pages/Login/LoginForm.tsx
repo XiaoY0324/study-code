@@ -1,6 +1,6 @@
 import * as React from "react";
-import  { createRef, RefObject, ChangeEvent } from 'react';  
-import { Input, Button, Icon, message } from 'antd';
+import  { useRef, RefObject } from 'react';  
+import { Input, Button, Icon } from 'antd';
 
 interface formDataProps {
   username: string,
@@ -10,11 +10,11 @@ interface formDataProps {
   changeInput: (key: string, domRef: RefObject<Input>) => void
 }
 
-const intUsername: RefObject<Input> = createRef();
-const intPassword: RefObject<Input> = createRef();
 
 const LoginComponent = (props: formDataProps) => {
-  let { username, password, loading, loginHandle, changeInput } = props;
+  const intUsername: RefObject<Input> = useRef();
+  const intPassword: RefObject<Input> = useRef();
+  let { username, loading, loginHandle, changeInput } = props;
 
   return <>
           <form>
