@@ -26,8 +26,8 @@ const loginHandler = () => {
 
 	setTimeout(() => {
 		loginState.loading = false;
-		localStorage.setItem('curUser', JSON.stringify({ username, password }));
-		window.location.href = '/home';
+		localStorage.setItem('token', JSON.stringify({ username, password }));
+		window.location.href = '/';
 	}, 1000);
 };
 
@@ -44,13 +44,12 @@ const changeInput = (key: string, domRef: RefObject<Input>): void => {
 }
 
 const LoginComponent = observer(() => {
-	console.log(localStorage.getItem('curUser'), !localStorage.getItem('curUser'), !!localStorage.getItem('curUser'));
-	const showLogin = !!localStorage.getItem('curUser');
+	const showLogin = !!localStorage.getItem('token');
 
 	return <>
 		{
 			showLogin
-				? <Redirect to="/home" />
+				? <Redirect to="/" />
 				: <div className="ligin-container">
 					<div className="login-box">
 						<LoginForm  {...loginState} loginHandle={loginHandler} changeInput={changeInput} />
