@@ -1,13 +1,12 @@
 const argv = require('yargs-parser')(process.argv.slice(2)); // 取命令行参数
 const path = require('path');
 const _mode = argv.mode || 'development';   // 区分开发环境和上线环境的配置
+const _modeflag = _mode === "production";
 const merge = require('webpack-merge');
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 提取css
+const ProgressBarPlugin = require("progress-bar-webpack-plugin"); // 进度条
 
-console.log(`./src/web/index-${_mode}.html`);
 const webpackConfig = {
   entry: "./src/web/index.tsx",
   output: {
@@ -40,13 +39,13 @@ const webpackConfig = {
       // -------- awesome-typescript-loader --------------
       // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
       // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-      
+
       // -------- ts-loader --------------
-      // { test: /\.tsx?$/, loader: "ts-loader" } 
+      // { test: /\.tsx?$/, loader: "ts-loader" }
 
       // -------- babel --------------
-      { 
-        test: /\.tsx?$/, 
+      {
+        test: /\.tsx?$/,
         loader: 'babel-loader'
       },
       {
@@ -68,13 +67,14 @@ const webpackConfig = {
     "react-dom": "ReactDOM"
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[id].css'
-    }),
-    new HtmlWebpackPlugin({ // 打包多页 去获取每个页面需要用到的js
-      template: `./src/web/index-${ _mode }.html`,
-      filename: `index.html` // 扔到dist目录
+    new ProgressBarPlugin(), // 进度条
+    new MiniCssExtractPlugin({ // 抽离css
+      filename: _modeflag
+        ? "styles/[name].[contenthash:5].css"
+        : "styles/[name].css",
+      chunkFilename: _modeflag
+        ? "styles/[name].[contenthash:5].css"
+        : "styles/[name].css"
     })
   ]
 };

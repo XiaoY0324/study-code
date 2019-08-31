@@ -68,8 +68,8 @@ const routes:YSProps[] = [
   }
 ]
 
-const generateRoutes = (routes:YSProps, NotFound: { (): JSX.Element; (): JSX.Element; }) => (token: string) => {
-  console.log(token, '~~~~~~~~~~~~~');
+const generateRoutes = (routes:YSProps, NotFound: { (): JSX.Element; (): JSX.Element; }) => (token: any) => {
+  console.log(token.password, '~~~~~~~~~~~~~');
   return <Suspense fallback={<Loading />}>
     <Switch>
       {routes.map((r, index) => {
@@ -84,7 +84,7 @@ const generateRoutes = (routes:YSProps, NotFound: { (): JSX.Element; (): JSX.Ele
             render={props =>
               !r.auth ? (
                 <LazyCom {...props} />
-              ) : token ? (
+              ) : token.password ? (
                 <LazyCom {...props} />
               ) : (
                 <Redirect

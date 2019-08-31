@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{22:function(e,t,n){"use strict";n.r(t);var a=n(0);t.default=()=>a.createElement("div",{className:"components-about"},a.createElement("input",{type:"text"}),"关于我们")}}]);

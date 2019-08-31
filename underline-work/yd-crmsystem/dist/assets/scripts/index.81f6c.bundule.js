@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{17:function(e,n,t){},21:function(e,n,t){"use strict";t.r(n);var c=t(0);t(17);n.default=()=>c.createElement("div",{className:"components-index"},c.createElement("h1",null,"控制面板"))}}]);

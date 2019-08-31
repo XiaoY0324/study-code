@@ -1,0 +1,19 @@
+
+:root {
+  --bgColor: white;
+}
+.about {
+  background: white;
+  background: var(--bgColor);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center
+}
+.about h1 {
+    --h1Color: yellowgreen;
+    color: var(--h1Color);
+}
+

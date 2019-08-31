@@ -1,0 +1,10 @@
+.components-login {
+  & span {
+    color: orange;
+  }
+}
+html,body {
+    height: 100%;
+    background-size: cover;
+    background-image: url('../../assets/images/bg.jpeg');
+}

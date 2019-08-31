@@ -1,13 +1,4 @@
-.ligin-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    color: red;
-    background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566053157833&di=260aa8001fbb807c2fef09821595f087&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F03839555742a6c932f875b70fb894f0.jpg) 0 0 no-repeat;
-    background-size: cover;
-}
-
-.login-box {
+/*.login-box {
     display: flex;
     width: 500px;
     height: 400px;
@@ -32,3 +23,4 @@
     margin-top: 21px;
     width: 113px;
 }
+*/

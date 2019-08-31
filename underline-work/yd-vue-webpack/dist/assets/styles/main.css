@@ -1,0 +1,47 @@
+
+#app{
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+  text-align: center;
+}
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+
+.home {
+}
+
+
+  .buylist h1 {
+    color: yellowgreen;
+  }
+
+.login {
+  padding-top: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center
+}
+.login .logincon {
+    border: 1px #409eff dashed;
+    --loginconUnit: 30px;
+    border-radius: var(--loginconUnit);
+    padding: var(--loginconUnit);
+    width: 30%;
+}
+

@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jest-stare!</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/diff2html.min.css" rel="stylesheet" type="text/css">
+    <link href="css/jest-stare.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/holder.js"></script>
+    <script src="js/diff2html.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/view.js"></script>
+</head>
+
+<body>
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">jest-stare</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="coverage-link" class="nav-link disabled" href="#">Coverage</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="onoff-switch mr-sm-2 ml-sm-2">
+                            <input type="checkbox" name="passoff-switch" class="passoff-switch-checkbox" id="lab-passoff-switch" checked>
+                            <label class="onoff-switch-label" for="lab-passoff-switch">
+                                <span class="passoff-switch-inner"></span>
+                                <span class="passoff-switch-switch"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div class="onoff-switch mr-sm-2 ml-sm-2">
+                            <input type="checkbox" name="failoff-switch" class="failoff-switch-checkbox" id="lab-failoff-switch" checked>
+                            <label class="onoff-switch-label" for="lab-failoff-switch">
+                                <span class="failoff-switch-inner"></span>
+                                <span class="failoff-switch-switch"></span>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <!-- <form class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" disabled>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" disabled>Search</button>
+                </form> -->
+            </div>
+        </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="container">
+
+        <h1 class="mt-5"></h1>
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            <div class="col-lg-4">
+                <canvas id="test-suites-canvas" width="100" height="100"></canvas>
+                <h2>Test Suites</h2>
+                <div class="list-group">
+                    <p id="test-suites-results" class="list-group-item list-group-item-action">1 passed, 4 total</p>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4">
+                <canvas id="tests-canvas" width="100" height="100"></canvas>
+                <h2>Tests</h2>
+                <div class="list-group">
+                    <p id="tests-results" class="list-group-item list-group-item-action">1 passed, 3 total</p>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+            <div class="col-lg-4" id="snapshots-group">
+                <canvas id="snapshots-canvas" width="100" height="100"></canvas>
+                <h2>Snapshots</h2>
+                <div class="list-group">
+                    <p id="snapshots-results" class="list-group-item list-group-item-action">0 passed, 0 total</p>
+                </div>
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+
+        <div id="loading-info" class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                aria-valuemax="100" style="width: 100%"></div>
+        </div>
+
+        <div class="d-none" id="test-config">{
+  &quot;additionalResultsProcessors&quot;: [],
+  &quot;resultDir&quot;: &quot;.&#x2F;docs&#x2F;jest-stare&#x2F;&#x2F;&quot;,
+  &quot;coverageLink&quot;: &quot;..&#x2F;jest-coverage&#x2F;index.html&quot;,
+  &quot;resultHtml&quot;: &quot;index.html&quot;,
+  &quot;resultJson&quot;: &quot;jest-results.json&quot;
+}</div>
+        <div class="d-none" id="test-results">{
+  &quot;numFailedTestSuites&quot;: 3,
+  &quot;numFailedTests&quot;: 2,
+  &quot;numPassedTestSuites&quot;: 1,
+  &quot;numPassedTests&quot;: 1,
+  &quot;numPendingTestSuites&quot;: 0,
+  &quot;numPendingTests&quot;: 0,
+  &quot;numRuntimeErrorTestSuites&quot;: 1,
+  &quot;numTodoTests&quot;: 0,
+  &quot;numTotalTestSuites&quot;: 4,
+  &quot;numTotalTests&quot;: 3,
+  &quot;openHandles&quot;: [],
+  &quot;snapshot&quot;: {
+    &quot;added&quot;: 0,
+    &quot;didUpdate&quot;: false,
+    &quot;failure&quot;: false,
+    &quot;filesAdded&quot;: 0,
+    &quot;filesRemoved&quot;: 0,
+    &quot;filesUnmatched&quot;: 0,
+    &quot;filesUpdated&quot;: 0,
+    &quot;matched&quot;: 0,
+    &quot;total&quot;: 0,
+    &quot;unchecked&quot;: 0,
+    &quot;uncheckedKeysByFile&quot;: [],
+    &quot;unmatched&quot;: 0,
+    &quot;updated&quot;: 0
+  },
+  &quot;startTime&quot;: 1561261865772,
+  &quot;success&quot;: false,
+  &quot;testResults&quot;: [
+    {
+      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[1mnode接口 › test接口测试\u001b[39m\u001b[22m\n\n    connect ECONNREFUSED 127.0.0.1:80\n\u001b[2m\u001b[22m\n\u001b[2m\u001b[22m\n&quot;,
+      &quot;numFailingTests&quot;: 1,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1561261867144,
+        &quot;start&quot;: 1561261866426
+      },
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0,
+        &quot;uncheckedKeys&quot;: []
+      },
+      &quot;testFilePath&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;tests&#x2F;service&#x2F;router.spec.ts&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;node接口&quot;
+          ],
+          &quot;duration&quot;: 14,
+          &quot;failureMessages&quot;: [
+            &quot;Error: connect ECONNREFUSED 127.0.0.1:80\n    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1054:14)&quot;
+          ],
+          &quot;fullName&quot;: &quot;node接口 test接口测试&quot;,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;test接口测试&quot;
+        }
+      ],
+      &quot;skipped&quot;: false,
+      &quot;leaks&quot;: false
+    },
+    {
+      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[1m函数单元测试 › adds 1 + 2 to equal 3\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; Object.is equality\u001b[22m\n\n    Expected: \u001b[32m3\u001b[39m\n    Received: \u001b[31m1\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 4 | \u001b[39mdescribe(\u001b[32m\&quot;函数单元测试\&quot;\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 5 | \u001b[39m  test(\u001b[32m\&quot;adds 1 + 2 to equal 3\&quot;\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m&#x3D;&gt;\u001b[39m {\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m\u001b[31m\u001b[1m&gt;\u001b[2m\u001b[39m\u001b[90m 6 | \u001b[39m    expect(yd\u001b[33m.\u001b[39msum(\u001b[35m1\u001b[39m\u001b[33m,\u001b[39m \u001b[35m2\u001b[39m))\u001b[33m.\u001b[39mtoBe(\u001b[35m3\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m   | \u001b[39m                         \u001b[31m\u001b[1m^\u001b[2m\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 7 | \u001b[39m  })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 8 | \u001b[39m})\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 9 | \u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.&lt;anonymous&gt; (\u001b[2m\u001b[0m\u001b[36mtests&#x2F;unit&#x2F;sum.spec.ts\u001b[39m\u001b[0m\u001b[2m:6:26)\u001b[2m\u001b[22m\n&quot;,
+      &quot;numFailingTests&quot;: 1,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1561261867254,
+        &quot;start&quot;: 1561261867170
+      },
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0,
+        &quot;uncheckedKeys&quot;: []
+      },
+      &quot;testFilePath&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;tests&#x2F;unit&#x2F;sum.spec.ts&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;函数单元测试&quot;
+          ],
+          &quot;duration&quot;: 5,
+          &quot;failureMessages&quot;: [
+            &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; Object.is equality\u001b[22m\n\nExpected: \u001b[32m3\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n    at Object.&lt;anonymous&gt; (&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;tests&#x2F;unit&#x2F;sum.spec.ts:6:26)\n    at Object.asyncJestTest (&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;jasmineAsyncInstall.js:102:37)\n    at &#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:43:12\n    at new Promise (&lt;anonymous&gt;)\n    at mapper (&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:26:19)\n    at &#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;jest-jasmine2&#x2F;build&#x2F;queueRunner.js:73:41&quot;
+          ],
+          &quot;fullName&quot;: &quot;函数单元测试 adds 1 + 2 to equal 3&quot;,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;status&quot;: &quot;failed&quot;,
+          &quot;title&quot;: &quot;adds 1 + 2 to equal 3&quot;
+        }
+      ],
+      &quot;skipped&quot;: false,
+      &quot;leaks&quot;: false
+    },
+    {
+      &quot;failureMessage&quot;: null,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 1,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1561261867626,
+        &quot;start&quot;: 1561261867281
+      },
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0,
+        &quot;uncheckedKeys&quot;: []
+      },
+      &quot;testFilePath&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;tests&#x2F;e2e&#x2F;home.spec.tsx&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;基础React单元测试&quot;
+          ],
+          &quot;duration&quot;: 17,
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;基础React单元测试 index组件测试&quot;,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 0,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;index组件测试&quot;
+        }
+      ],
+      &quot;skipped&quot;: false,
+      &quot;leaks&quot;: false
+    },
+    {
+      &quot;displayName&quot;: &quot;&quot;,
+      &quot;failureMessage&quot;: &quot;  \u001b[1m● \u001b[22mTest suite failed to run\n\n    Your test suite must contain at least one test.\n\n      \u001b[2mat \u001b[22mnode_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js\u001b[2m:242:24\u001b[22m\n      \u001b[2mat asyncGeneratorStep (\u001b[22mnode_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js\u001b[2m:131:24)\u001b[22m\n      \u001b[2mat _next (\u001b[22mnode_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js\u001b[2m:151:9)\u001b[22m\n      \u001b[2mat \u001b[22mnode_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js\u001b[2m:156:7\u001b[22m\n      \u001b[2mat \u001b[22mnode_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js\u001b[2m:148:12\u001b[22m\n      \u001b[2mat onResult (\u001b[22mnode_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js\u001b[2m:271:25)\u001b[22m\n&quot;,
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 0,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 0,
+        &quot;start&quot;: 0
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 0
+      },
+      &quot;testExecError&quot;: {
+        &quot;message&quot;: &quot;Your test suite must contain at least one test.&quot;,
+        &quot;stack&quot;: &quot;Error: Your test suite must contain at least one test.\n    at &#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js:242:24\n    at Generator.next (&lt;anonymous&gt;)\n    at asyncGeneratorStep (&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js:131:24)\n    at _next (&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js:151:9)\n    at &#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js:156:7\n    at new Promise (&lt;anonymous&gt;)\n    at &#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js:148:12\n    at onResult (&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;core&#x2F;build&#x2F;TestScheduler.js:271:25)\n    at &#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;jest-runner&#x2F;build&#x2F;index.js:162:31&quot;
+      },
+      &quot;testFilePath&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;tests&#x2F;e2e&#x2F;index.spec.tsx&quot;,
+      &quot;testResults&quot;: []
+    }
+  ],
+  &quot;wasInterrupted&quot;: false,
+  &quot;coverageMap&quot;: {
+    &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;src&#x2F;web&#x2F;utils&#x2F;yd.ts&quot;: {
+      &quot;path&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;src&#x2F;web&#x2F;utils&#x2F;yd.ts&quot;,
+      &quot;statementMap&quot;: {
+        &quot;0&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 6,
+            &quot;column&quot;: 19
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 6,
+            &quot;column&quot;: 34
+          }
+        },
+        &quot;1&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 7,
+            &quot;column&quot;: 13
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 7,
+            &quot;column&quot;: 28
+          }
+        },
+        &quot;2&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 8,
+            &quot;column&quot;: 10
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 11,
+            &quot;column&quot;: 1
+          }
+        },
+        &quot;3&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 9,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 9,
+            &quot;column&quot;: 46
+          }
+        },
+        &quot;4&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 9,
+            &quot;column&quot;: 28
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 9,
+            &quot;column&quot;: 46
+          }
+        },
+        &quot;5&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 10,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 10,
+            &quot;column&quot;: 22
+          }
+        },
+        &quot;6&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 13,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 23,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;7&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 13,
+            &quot;column&quot;: 26
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 13,
+            &quot;column&quot;: null
+          }
+        },
+        &quot;8&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 15,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 22,
+            &quot;column&quot;: 4
+          }
+        },
+        &quot;9&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 15,
+            &quot;column&quot;: 18
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 15,
+            &quot;column&quot;: 25
+          }
+        },
+        &quot;10&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 16,
+            &quot;column&quot;: 4
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 21,
+            &quot;column&quot;: null
+          }
+        },
+        &quot;11&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 17,
+            &quot;column&quot;: 6
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 19,
+            &quot;column&quot;: 15
+          }
+        },
+        &quot;12&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 18,
+            &quot;column&quot;: 8
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 18,
+            &quot;column&quot;: 21
+          }
+        },
+        &quot;13&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 20,
+            &quot;column&quot;: 6
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 20,
+            &quot;column&quot;: 34
+          }
+        },
+        &quot;14&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 24,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 29,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;15&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 25,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 27,
+            &quot;column&quot;: null
+          }
+        },
+        &quot;16&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 26,
+            &quot;column&quot;: 4
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 26,
+            &quot;column&quot;: 13
+          }
+        },
+        &quot;17&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 28,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 28,
+            &quot;column&quot;: 15
+          }
+        },
+        &quot;18&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 30,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 34,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;19&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 31,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 31,
+            &quot;column&quot;: 21
+          }
+        },
+        &quot;20&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 32,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 32,
+            &quot;column&quot;: 29
+          }
+        },
+        &quot;21&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 33,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 33,
+            &quot;column&quot;: 30
+          }
+        },
+        &quot;22&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 35,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 41,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;23&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 36,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 40,
+            &quot;column&quot;: null
+          }
+        },
+        &quot;24&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 37,
+            &quot;column&quot;: 4
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 39,
+            &quot;column&quot;: null
+          }
+        },
+        &quot;25&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 37,
+            &quot;column&quot;: 23
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 37,
+            &quot;column&quot;: 26
+          }
+        },
+        &quot;26&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 37,
+            &quot;column&quot;: 19
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 37,
+            &quot;column&quot;: 23
+          }
+        },
+        &quot;27&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 38,
+            &quot;column&quot;: 6
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 38,
+            &quot;column&quot;: 41
+          }
+        },
+        &quot;28&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 42,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 44,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;29&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 43,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 43,
+            &quot;column&quot;: 44
+          }
+        },
+        &quot;30&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 45,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 51,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;31&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 46,
+            &quot;column&quot;: 16
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 46,
+            &quot;column&quot;: 18
+          }
+        },
+        &quot;32&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 47,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 49,
+            &quot;column&quot;: null
+          }
+        },
+        &quot;33&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 48,
+            &quot;column&quot;: 4
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 48,
+            &quot;column&quot;: 48
+          }
+        },
+        &quot;34&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 48,
+            &quot;column&quot;: 32
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 48,
+            &quot;column&quot;: 48
+          }
+        },
+        &quot;35&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 50,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 50,
+            &quot;column&quot;: 22
+          }
+        },
+        &quot;36&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 53,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 63,
+            &quot;column&quot;: 2
+          }
+        },
+        &quot;37&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 54,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 61,
+            &quot;column&quot;: 5
+          }
+        },
+        &quot;38&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 55,
+            &quot;column&quot;: 18
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 55,
+            &quot;column&quot;: 37
+          }
+        },
+        &quot;39&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 56,
+            &quot;column&quot;: 4
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 60,
+            &quot;column&quot;: 6
+          }
+        },
+        &quot;40&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 57,
+            &quot;column&quot;: 19
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 57,
+            &quot;column&quot;: 34
+          }
+        },
+        &quot;41&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 58,
+            &quot;column&quot;: 6
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 58,
+            &quot;column&quot;: 34
+          }
+        },
+        &quot;42&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 59,
+            &quot;column&quot;: 6
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 59,
+            &quot;column&quot;: 33
+          }
+        },
+        &quot;43&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 62,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 62,
+            &quot;column&quot;: 11
+          }
+        },
+        &quot;44&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 64,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 64,
+            &quot;column&quot;: 11
+          }
+        },
+        &quot;45&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 65,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 65,
+            &quot;column&quot;: 17
+          }
+        }
+      },
+      &quot;fnMap&quot;: {
+        &quot;0&quot;: {
+          &quot;name&quot;: &quot;(anonymous_0)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 8,
+              &quot;column&quot;: 10
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 8,
+              &quot;column&quot;: 19
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 8,
+              &quot;column&quot;: 22
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 11,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;1&quot;: {
+          &quot;name&quot;: &quot;(anonymous_1)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 13,
+              &quot;column&quot;: 13
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 13,
+              &quot;column&quot;: 22
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 13,
+              &quot;column&quot;: 36
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 23,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;2&quot;: {
+          &quot;name&quot;: &quot;(anonymous_2)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 15,
+              &quot;column&quot;: 9
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 15,
+              &quot;column&quot;: 18
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 15,
+              &quot;column&quot;: 9
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 22,
+              &quot;column&quot;: 3
+            }
+          }
+        },
+        &quot;3&quot;: {
+          &quot;name&quot;: &quot;(anonymous_3)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 17,
+              &quot;column&quot;: 25
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 17,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 17,
+              &quot;column&quot;: 25
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 19,
+              &quot;column&quot;: 7
+            }
+          }
+        },
+        &quot;4&quot;: {
+          &quot;name&quot;: &quot;(anonymous_4)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 24,
+              &quot;column&quot;: 8
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 24,
+              &quot;column&quot;: 9
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 24,
+              &quot;column&quot;: 29
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 29,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;5&quot;: {
+          &quot;name&quot;: &quot;(anonymous_5)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 30,
+              &quot;column&quot;: 8
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 30,
+              &quot;column&quot;: 17
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 30,
+              &quot;column&quot;: 34
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 34,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;6&quot;: {
+          &quot;name&quot;: &quot;(anonymous_6)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 35,
+              &quot;column&quot;: 9
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 35,
+              &quot;column&quot;: 18
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 35,
+              &quot;column&quot;: 31
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 41,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;7&quot;: {
+          &quot;name&quot;: &quot;(anonymous_7)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 42,
+              &quot;column&quot;: 15
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 42,
+              &quot;column&quot;: 24
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 42,
+              &quot;column&quot;: 27
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 44,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;8&quot;: {
+          &quot;name&quot;: &quot;(anonymous_8)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 45,
+              &quot;column&quot;: 14
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 45,
+              &quot;column&quot;: 23
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 45,
+              &quot;column&quot;: 26
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 51,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;9&quot;: {
+          &quot;name&quot;: &quot;(anonymous_9)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 53,
+              &quot;column&quot;: 10
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 53,
+              &quot;column&quot;: 19
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 53,
+              &quot;column&quot;: 22
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 63,
+              &quot;column&quot;: 1
+            }
+          }
+        },
+        &quot;10&quot;: {
+          &quot;name&quot;: &quot;(anonymous_10)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 54,
+              &quot;column&quot;: 27
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 54,
+              &quot;column&quot;: 31
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 54,
+              &quot;column&quot;: 31
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 61,
+              &quot;column&quot;: 3
+            }
+          }
+        },
+        &quot;11&quot;: {
+          &quot;name&quot;: &quot;(anonymous_11)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 56,
+              &quot;column&quot;: 24
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 56,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 56,
+              &quot;column&quot;: 24
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 60,
+              &quot;column&quot;: 5
+            }
+          }
+        }
+      },
+      &quot;branchMap&quot;: {
+        &quot;0&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 9,
+              &quot;column&quot;: 2
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 9,
+              &quot;column&quot;: 46
+            }
+          },
+          &quot;type&quot;: &quot;if&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 9,
+                &quot;column&quot;: 2
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 9,
+                &quot;column&quot;: 46
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 9,
+                &quot;column&quot;: 2
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 9,
+                &quot;column&quot;: 46
+              }
+            }
+          ]
+        },
+        &quot;1&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 13,
+              &quot;column&quot;: 26
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 13,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;type&quot;: &quot;if&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 13,
+                &quot;column&quot;: 26
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 13,
+                &quot;column&quot;: null
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 13,
+                &quot;column&quot;: 26
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 13,
+                &quot;column&quot;: null
+              }
+            }
+          ]
+        },
+        &quot;2&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 16,
+              &quot;column&quot;: 4
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 21,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;type&quot;: &quot;if&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 16,
+                &quot;column&quot;: 4
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 21,
+                &quot;column&quot;: null
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 16,
+                &quot;column&quot;: 4
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 21,
+                &quot;column&quot;: null
+              }
+            }
+          ]
+        },
+        &quot;3&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 25,
+              &quot;column&quot;: 2
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 27,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;type&quot;: &quot;if&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 25,
+                &quot;column&quot;: 2
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 27,
+                &quot;column&quot;: null
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 25,
+                &quot;column&quot;: 2
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 27,
+                &quot;column&quot;: null
+              }
+            }
+          ]
+        },
+        &quot;4&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 36,
+              &quot;column&quot;: 2
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 40,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;type&quot;: &quot;if&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 36,
+                &quot;column&quot;: 2
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 40,
+                &quot;column&quot;: null
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 36,
+                &quot;column&quot;: 2
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 40,
+                &quot;column&quot;: null
+              }
+            }
+          ]
+        },
+        &quot;5&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 38,
+              &quot;column&quot;: 6
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 38,
+              &quot;column&quot;: 14
+            }
+          },
+          &quot;type&quot;: &quot;binary-expr&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 38,
+                &quot;column&quot;: 6
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 38,
+                &quot;column&quot;: 14
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 38,
+                &quot;column&quot;: 18
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 38,
+                &quot;column&quot;: 40
+              }
+            }
+          ]
+        },
+        &quot;6&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 43,
+              &quot;column&quot;: 9
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 43,
+              &quot;column&quot;: 34
+            }
+          },
+          &quot;type&quot;: &quot;binary-expr&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 43,
+                &quot;column&quot;: 9
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 43,
+                &quot;column&quot;: 34
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 43,
+                &quot;column&quot;: 38
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 43,
+                &quot;column&quot;: 43
+              }
+            }
+          ]
+        },
+        &quot;7&quot;: {
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 48,
+              &quot;column&quot;: 4
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 48,
+              &quot;column&quot;: 48
+            }
+          },
+          &quot;type&quot;: &quot;if&quot;,
+          &quot;locations&quot;: [
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 48,
+                &quot;column&quot;: 4
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 48,
+                &quot;column&quot;: 48
+              }
+            },
+            {
+              &quot;start&quot;: {
+                &quot;line&quot;: 48,
+                &quot;column&quot;: 4
+              },
+              &quot;end&quot;: {
+                &quot;line&quot;: 48,
+                &quot;column&quot;: 48
+              }
+            }
+          ]
+        }
+      },
+      &quot;s&quot;: {
+        &quot;0&quot;: 1,
+        &quot;1&quot;: 1,
+        &quot;2&quot;: 1,
+        &quot;3&quot;: 0,
+        &quot;4&quot;: 0,
+        &quot;5&quot;: 0,
+        &quot;6&quot;: 1,
+        &quot;7&quot;: 0,
+        &quot;8&quot;: 0,
+        &quot;9&quot;: 0,
+        &quot;10&quot;: 0,
+        &quot;11&quot;: 0,
+        &quot;12&quot;: 0,
+        &quot;13&quot;: 0,
+        &quot;14&quot;: 1,
+        &quot;15&quot;: 1,
+        &quot;16&quot;: 1,
+        &quot;17&quot;: 0,
+        &quot;18&quot;: 1,
+        &quot;19&quot;: 0,
+        &quot;20&quot;: 0,
+        &quot;21&quot;: 0,
+        &quot;22&quot;: 1,
+        &quot;23&quot;: 1,
+        &quot;24&quot;: 1,
+        &quot;25&quot;: 2,
+        &quot;26&quot;: 7,
+        &quot;27&quot;: 7,
+        &quot;28&quot;: 1,
+        &quot;29&quot;: 7,
+        &quot;30&quot;: 1,
+        &quot;31&quot;: 1,
+        &quot;32&quot;: 1,
+        &quot;33&quot;: 7,
+        &quot;34&quot;: 7,
+        &quot;35&quot;: 1,
+        &quot;36&quot;: 1,
+        &quot;37&quot;: 1,
+        &quot;38&quot;: 7,
+        &quot;39&quot;: 7,
+        &quot;40&quot;: 0,
+        &quot;41&quot;: 0,
+        &quot;42&quot;: 0,
+        &quot;43&quot;: 1,
+        &quot;44&quot;: 1,
+        &quot;45&quot;: 1
+      },
+      &quot;f&quot;: {
+        &quot;0&quot;: 0,
+        &quot;1&quot;: 0,
+        &quot;2&quot;: 0,
+        &quot;3&quot;: 0,
+        &quot;4&quot;: 1,
+        &quot;5&quot;: 0,
+        &quot;6&quot;: 1,
+        &quot;7&quot;: 7,
+        &quot;8&quot;: 1,
+        &quot;9&quot;: 1,
+        &quot;10&quot;: 7,
+        &quot;11&quot;: 0
+      },
+      &quot;b&quot;: {
+        &quot;0&quot;: [
+          0,
+          0
+        ],
+        &quot;1&quot;: [
+          0,
+          0
+        ],
+        &quot;2&quot;: [
+          0,
+          0
+        ],
+        &quot;3&quot;: [
+          1,
+          0
+        ],
+        &quot;4&quot;: [
+          1,
+          0
+        ],
+        &quot;5&quot;: [
+          7,
+          7
+        ],
+        &quot;6&quot;: [
+          7,
+          0
+        ],
+        &quot;7&quot;: [
+          7,
+          0
+        ]
+      }
+    },
+    &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;src&#x2F;web&#x2F;components&#x2F;Home&#x2F;index.tsx&quot;: {
+      &quot;path&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;src&#x2F;web&#x2F;components&#x2F;Home&#x2F;index.tsx&quot;,
+      &quot;statementMap&quot;: {
+        &quot;0&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 1,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 1,
+            &quot;column&quot;: 31
+          }
+        },
+        &quot;1&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 3,
+            &quot;column&quot;: 13
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 13,
+            &quot;column&quot;: 1
+          }
+        },
+        &quot;2&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 4,
+            &quot;column&quot;: 2
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 12,
+            &quot;column&quot;: 4
+          }
+        },
+        &quot;3&quot;: {
+          &quot;start&quot;: {
+            &quot;line&quot;: 14,
+            &quot;column&quot;: 0
+          },
+          &quot;end&quot;: {
+            &quot;line&quot;: 14,
+            &quot;column&quot;: 20
+          }
+        }
+      },
+      &quot;fnMap&quot;: {
+        &quot;0&quot;: {
+          &quot;name&quot;: &quot;(anonymous_0)&quot;,
+          &quot;decl&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 3,
+              &quot;column&quot;: 13
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 3,
+              &quot;column&quot;: null
+            }
+          },
+          &quot;loc&quot;: {
+            &quot;start&quot;: {
+              &quot;line&quot;: 3,
+              &quot;column&quot;: 13
+            },
+            &quot;end&quot;: {
+              &quot;line&quot;: 13,
+              &quot;column&quot;: 1
+            }
+          }
+        }
+      },
+      &quot;branchMap&quot;: {},
+      &quot;s&quot;: {
+        &quot;0&quot;: 1,
+        &quot;1&quot;: 1,
+        &quot;2&quot;: 1,
+        &quot;3&quot;: 1
+      },
+      &quot;f&quot;: {
+        &quot;0&quot;: 1
+      },
+      &quot;b&quot;: {}
+    }
+  }
+}</div>
+        <div class="d-none" id="test-global-config">{
+  &quot;bail&quot;: 0,
+  &quot;changedFilesWithAncestor&quot;: false,
+  &quot;collectCoverage&quot;: true,
+  &quot;collectCoverageFrom&quot;: null,
+  &quot;coverageDirectory&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;docs&#x2F;jest-coverage&quot;,
+  &quot;coverageReporters&quot;: [
+    &quot;json&quot;,
+    &quot;html&quot;
+  ],
+  &quot;coverageThreshold&quot;: {
+    &quot;global&quot;: {
+      &quot;branches&quot;: 50,
+      &quot;functions&quot;: 95,
+      &quot;lines&quot;: 95,
+      &quot;statements&quot;: 95
+    }
+  },
+  &quot;detectLeaks&quot;: false,
+  &quot;detectOpenHandles&quot;: false,
+  &quot;errorOnDeprecated&quot;: false,
+  &quot;expand&quot;: false,
+  &quot;filter&quot;: null,
+  &quot;globalSetup&quot;: null,
+  &quot;globalTeardown&quot;: null,
+  &quot;json&quot;: false,
+  &quot;listTests&quot;: false,
+  &quot;maxConcurrency&quot;: 5,
+  &quot;maxWorkers&quot;: 3,
+  &quot;noStackTrace&quot;: false,
+  &quot;nonFlagArgs&quot;: [],
+  &quot;notify&quot;: false,
+  &quot;notifyMode&quot;: &quot;failure-change&quot;,
+  &quot;passWithNoTests&quot;: false,
+  &quot;projects&quot;: null,
+  &quot;reporters&quot;: [
+    [
+      &quot;default&quot;,
+      {}
+    ],
+    [
+      &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;jest-stare&#x2F;lib&#x2F;index.js&quot;,
+      {}
+    ]
+  ],
+  &quot;rootDir&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&quot;,
+  &quot;runTestsByPath&quot;: false,
+  &quot;skipFilter&quot;: false,
+  &quot;testFailureExitCode&quot;: 1,
+  &quot;testPathPattern&quot;: &quot;&quot;,
+  &quot;testResultsProcessor&quot;: null,
+  &quot;testSequencer&quot;: &quot;&#x2F;Users&#x2F;yuanzhijia&#x2F;Desktop&#x2F;yd-crmsystem&#x2F;node_modules&#x2F;@jest&#x2F;test-sequencer&#x2F;build&#x2F;index.js&quot;,
+  &quot;updateSnapshot&quot;: &quot;new&quot;,
+  &quot;useStderr&quot;: false,
+  &quot;verbose&quot;: null,
+  &quot;watch&quot;: false,
+  &quot;watchman&quot;: true
+}</div>
+
+    </main>
+    <hr>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">&copy; jest-stare 2019</span>
+        </div>
+    </footer>
+</body>
+
+</html>
