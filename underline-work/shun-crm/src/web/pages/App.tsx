@@ -11,8 +11,8 @@ import { observer } from "mobx-react-lite";
 const App = observer(() => {
   const ysStore = useContext(YsStore); // 取到对应全局变量
   const token = ysStore.token;
-
-  console.log('token is', token);
+  console.log("🍉APP模板渲染");
+  console.log('token is222', token);
   return (
     <>
       <BrowserRouter basename="/">

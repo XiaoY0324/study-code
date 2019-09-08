@@ -4,7 +4,7 @@ import "./index.css";
 const Home = () => {
   return (
     <div className="components-index">
-      <h1>控制面板</h1>
+      <h1>带banner的首页</h1>
     </div>
   );
 };

@@ -1,6 +1,45 @@
-.components-banner{
+.components-banner {
+  float: left;
+  width: 100vw;
+  padding: 0 20px;
+  margin-bottom: 12px;
+
+  & .logo {
+    float: left;
+    width: 106px;
+    height: 42px;
+    font-weight: 700;
+    font-family: Helvetica,sans-serif;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    & a {
+      color: #5584ff;
+      font-size: 36px;
+    }
+  }
+
+  & ul {
+    padding: 10px 15px;
+    float: right;
+    width: auto;
+    margin: 0;
+  }
+
   & li {
       margin-right: 15px;
       list-style: none;
+      float: left;
+      padding: 5px 15px;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background: blueviolet;
+      }
+
+      & a {
+        color: #fff;
+      }
   }
 }

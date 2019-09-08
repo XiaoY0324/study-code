@@ -1,6 +1,6 @@
 import "./login.css";
 import * as React from "react";
-import { NavLink,RouteComponentProps } from "react-router-dom";
+import { NavLink, RouteComponentProps } from "react-router-dom";
 import YsStore from "@models/YsStore";
 import { observer } from "mobx-react-lite";
 
@@ -8,7 +8,7 @@ import Form from './form';
 import { ChangeEvent, useContext } from "react";
 
 /**
- * 接收顶层route传来的 props
+ * 接收顶层route传来的 props 
  */
 const Login = observer((routerProps:RouteComponentProps) => {
   const { location, history } = routerProps;
@@ -44,12 +44,15 @@ const Login = observer((routerProps:RouteComponentProps) => {
   return (
     <>
       <div className="components-login">
-        {/* <span>{ ysStore.token }</span> */}
-        <span>
-          <NavLink to="/">首页xxx</NavLink>
-        </span>
-        <Form { ...ysStore }  changeInput={ changeInput } loginIn={ loginIn }/>
-        {/* <input type="button" value="登录系统首页" onClick={loginIn} /> */ }
+        <div className="warp">
+          <div className="info">
+            <h1>内容管理系统</h1>
+            <p>运营与管控一体化的整合式服务平台</p>
+            <p>一起解构数字世界，碰撞科技创新思想</p>
+          </div>
+          <Form { ...ysStore }  changeInput={ changeInput } loginIn={ loginIn }/>
+        </div>
+        <div className="copy-right">好未来教育集团 © 2018 版权所有</div>
       </div>
     </>
   );

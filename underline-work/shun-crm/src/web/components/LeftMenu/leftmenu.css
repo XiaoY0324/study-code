@@ -1,0 +1,9 @@
+.components-leftMenu {
+  width: 200px;
+}
+
+.ant-menu-dark a {
+  position: absolute;
+  top: 0;
+  left: 47px;
+}

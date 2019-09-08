@@ -18,15 +18,18 @@ const LoginComponent = (props: formDataProps) => {
   console.log(token);
   return <>
     <form>
+      <h2>登录</h2>
       <Input prefix={ <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' } } />}
         placeholder="username"
+        size="large"
         onChange={ changeInput }
         value={ token.username } />
-      <Input prefix={ <Icon type="password" style={{ color: 'rgba(0,0,0,.25)' } } />}
+      <Input prefix={ <Icon type="eye" style={{ color: 'rgba(0,0,0,.25)' } } />}
         placeholder="password"
+        size="large"
         onChange={ changeInput }
         value={ token.password } />
-      <Button onClick={ loginIn } loading={ loading }>
+      <Button onClick={ loginIn } loading={ loading } type="primary">
         登录
       </Button>
     </form>

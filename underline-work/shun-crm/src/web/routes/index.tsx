@@ -6,6 +6,11 @@ import { Route, Switch, RouteProps, Redirect } from "react-router-dom";
 import Home from '@components/Home';
 import Login from '@components/Login';
 
+/**
+ * 引入页面模块路由
+ */
+import intentionRoute from './intention';
+
 import Loading from "@components/Loading";
 import NotFound from "@components/NotFound";
 
@@ -22,16 +27,16 @@ const Layout = lazy(() =>
   import(/* webpackChunkName:"layout" */ "@pages/Layout")
 );
 
-const Welcome = () => {
-  return <span>欢迎使用杨帅~~管理系统</span>;
+const Layout404 = () => {
+  return <div className="layout404">页面走丢啦</div>;
 };
 interface YSProps extends RouteProps {
   map?(arg0: (r: any, index: any) => JSX.Element): React.ReactNode;
   auth?: boolean;
 }
 
-// (使用了Layout 包裹 带 banner 的路由)
-const indexRoutes: YSProps[] = [
+// (使用了Layout 包裹 带 banner leftmenu 的路由)
+let indexRoutes: YSProps[] = [
   {
     path: "/index/index",
     exact: true,
@@ -46,7 +51,9 @@ const indexRoutes: YSProps[] = [
   }
 ];
 
-// 页面路由
+indexRoutes = indexRoutes.concat(intentionRoute);
+
+// 基础路由(全部依托APP.tsx)
 const routes:YSProps[] = [
   {
     path: "/",
@@ -54,7 +61,7 @@ const routes:YSProps[] = [
     auth: true, 
     component: Home
   },
-  {
+  { // 渲染 login 组件
     path: "/login",
     exact: true,
     auth: false, 
@@ -69,7 +76,6 @@ const routes:YSProps[] = [
 ]
 
 const generateRoutes = (routes:YSProps, NotFound: { (): JSX.Element; (): JSX.Element; }) => (token: any) => {
-  console.log(token.password, '~~~~~~~~~~~~~');
   return <Suspense fallback={<Loading />}>
     <Switch>
       {routes.map((r, index) => {
@@ -105,7 +111,7 @@ const generateRoutes = (routes:YSProps, NotFound: { (): JSX.Element; (): JSX.Ele
 
 // 对状态属性进行监听
 const Routes = generateRoutes(routes, NotFound); // 页面路由
-const IndexRoutes = generateRoutes(indexRoutes, Welcome); // 根路由
+const IndexRoutes = generateRoutes(indexRoutes, Layout404); // 根路由
 
 export { IndexRoutes };
 export default Routes;

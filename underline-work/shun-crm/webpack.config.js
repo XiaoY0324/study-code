@@ -31,7 +31,12 @@ const webpackConfig = {
       {
         test: /\.css$/,
         use: [
-          { loader: MiniCssExtractPlugin.loader },
+          { 
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: !_modeflag // 开发环境 css 热刷新 切记一定配上这个
+            }
+          },
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader'
         ]

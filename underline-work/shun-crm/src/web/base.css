@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #2e323f;
+  background-image: url(https://img.alicdn.com/tfs/TB1_YvwXTtYBeNjy1XdXXXXyVXa-1680-370.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+.components-banner +  .content {
+  & .pages {
+    position: absolute;
+    top: 114px;
+    left: 200px;
+    right: 15px;
+    padding: 0 0 0 20px;
+  }
+}
+
+.layout404 {
+  height: 150px;
+  color: orange;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background: #fff;
+}

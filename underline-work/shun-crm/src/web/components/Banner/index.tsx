@@ -1,3 +1,6 @@
+/**
+ * 顶部 banner
+ */
 import * as React from "react";
 const { useContext } = React;
 import { NavLink } from "react-router-dom";
@@ -17,7 +20,9 @@ const Banner = observer(props => {
   // const show = !ydstore.needHidden ? "show" : "";
   return (
     <div className="components-banner">
-      <input type="text" />
+      <div className="logo">
+        <NavLink to="/">SHUN</NavLink>
+      </div>
       <ul>
         <li>
           <NavLink to="/index/index">首页</NavLink>

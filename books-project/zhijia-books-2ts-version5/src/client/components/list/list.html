@@ -1,0 +1,18 @@
+<div class="books pjaxcontext components-list">
+    <h1 class="item">标题1</h1>
+    <h1 class="test">标题2</h1>
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th class="text-center">编号</th>
+            <th class="text-center">书名</th>
+            <th class="text-center">类型</th>
+        </tr>
+        {% for list in bookLists %}
+            <tr>
+                <td>[[list.id]]</td>
+                <td>[[list.name]]</td>
+                <td>[[list.type]]</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

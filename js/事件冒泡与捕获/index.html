@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .yeye {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      background: pink;
+    }
+
+    .erzi {
+      display: flex;
+      width: 150px;
+      height: 150px;
+      margin: auto;
+      background: palegreen;
+    }
+
+    .sunzi {
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      background: plum;
+    }
+  </style>
+</head>
+<body>
+  <div class="yeye">
+    <div class="erzi">
+      <div class="sunzi"></div>
+    </div>
+  </div>
+</body>
+<script>
+  const divLists = document.getElementsByTagName('div');
+  
+  Array.from(divLists).map(function(div) {
+    div.onclick = function() {
+      const curClass = this.getAttribute('class');
+
+      switch (curClass) {
+        case 'yeye':
+          console.log('进击的爷爷');
+          break;
+        case 'erzi':
+          console.log('暴躁的儿子');
+          break;
+        case 'sunzi':
+          console.log('乖巧的孙子');
+          break;
+      }
+    };
+  });
+</script>
+</html>

@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 const Home = () => {
   return (
     <div className="components-home">
-      <h1>杨帅React项目脚手架</h1>
+        <li>
+          <NavLink to="/index/index">打开新世界的大门</NavLink>
+        </li>
     </div>
   );
 };
