@@ -4,8 +4,11 @@
 import * as React from "react";
 const { useContext } = React;
 import { NavLink } from "react-router-dom";
-import "./banner.css";
 import { observer } from "mobx-react-lite";
+import { Menu, Dropdown, Button, Icon, message } from 'antd';
+import YsStore from "@models/YsStore";
+import "./banner.css";
+
 const Banner = observer(props => {
   console.log("🌶Banner渲染", props);
   // console.log("硬获取", location.pathname);
@@ -18,6 +21,31 @@ const Banner = observer(props => {
   //   return null;
   // }
   // const show = !ydstore.needHidden ? "show" : "";
+  const ysStore = useContext(YsStore);
+  const loginStatus = ysStore.token && ysStore.token.username;
+
+  const handleMenuClick = (e: any) => {
+    if (e.key == '1') {
+      localStorage.removeItem('token');
+      return window.location.href = "/login";
+    } 
+
+    window.location.href = "/login";
+  }
+
+  const menu = (
+    <Menu onClick={ handleMenuClick }>
+      <Menu.Item key="1" style={{ display: loginStatus ? 'inline' : 'none' }}>
+        <Icon type="user" />
+        退出登录
+      </Menu.Item>
+      <Menu.Item key="2" style={{ display: loginStatus ? 'none' : 'inline' }}>
+        <Icon type="user" />
+        立即登录
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <div className="components-banner">
       <div className="logo">
@@ -35,6 +63,11 @@ const Banner = observer(props => {
         </li>
         <li>
           <NavLink to="/index/about">关于我们</NavLink>
+        </li>
+        <li>
+          <Dropdown.Button overlay={menu} icon={<Icon type="down" />} placement="bottomRight">
+            { ysStore.token ? ysStore.token.username : '产品小汪' }
+          </Dropdown.Button>
         </li>
       </ul>
     </div>

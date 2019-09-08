@@ -42,4 +42,19 @@
         color: #fff;
       }
   }
+
+  & li:last-child {
+    padding: 0;
+
+    &:hover {
+      background: none !important;
+    }
+
+    & button {
+      padding: 0;
+      background: none;
+      color: #fff;
+      border: none;
+    }
+  }
 }
