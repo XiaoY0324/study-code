@@ -1,0 +1,31 @@
+{
+  "name": "shun-ssr-crm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "server": "webpack --config webpack.server.config.js",
+    "client": "webpack --config webpack.client.config.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "co": "^4.6.0",
+    "html-webpack-plugin": "^3.2.0",
+    "koa": "^2.8.1",
+    "koa-simple-router": "^0.2.0",
+    "koa-static": "^5.0.0",
+    "koa-swig": "^2.2.1",
+    "lru-cache": "^5.1.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "webpack": "^4.39.3"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.8"
+  }
+}
